@@ -13,13 +13,13 @@ var StockModel = Backbone.Model.extend({
   getValue: function(indexOrDate) {
     var history = this.get('history');
     if (typeof indexOrDate === number) {
-      return history[indexOrDate].close * this.get('amount');
+      return history[indexOrDate].close * (this.get('amount') / this.getStartVal()); // scaling factor
     } else {
       var snapshot = _.findWhere(history, {date: indexOrDate});
       if (!snapshot) {
         return null;
       } else {
-        return snapshot.close * this.get('amount');
+        return snapshot.close * (this.get('amount') / this.getStartVal());
       }
     }
   },
