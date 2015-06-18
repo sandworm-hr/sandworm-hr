@@ -21,7 +21,9 @@ module.exports = function(grunt) {
         ignores: [
           'client/assets/*.js',
           'node_modules/**/*.js',
-          '**/node_modules/**/*.js'
+          '**/node_modules/**/*.js',
+          'bower_components/**/*.js',
+          '**/bower_components/**/*.js'
         ]
       }
     },

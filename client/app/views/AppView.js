@@ -3,8 +3,8 @@ var AppView = Backbone.View.extend({
 
   el:'.main',
 
-  initialize: function(){
-    this.formView = new FormView();
+  initialize: function(stockCollection){
+    this.formView = new FormView({collection: new Stocks()});
     this.graphView = new GraphView();
     this.infoView = new InfoView();
     this.render();
