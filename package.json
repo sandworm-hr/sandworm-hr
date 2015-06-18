@@ -25,7 +25,8 @@
     "body-parser": "^1.13.1",
     "express": "^4.12.4",
     "morgan": "^1.6.0",
-    "node": "0.0.0"
+    "node": "0.0.0",
+    "yahoo-finance": "^0.2.11"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
