@@ -4,7 +4,7 @@ var StockModel = Backbone.Model.extend({
   url: '/api/stocks',
 
   initialize: function(){
-
+    this.set('nShares', this.get('history')[0].close);
   },
 
   /* given an index or date, returns the value of user's stock at that time
@@ -13,13 +13,13 @@ var StockModel = Backbone.Model.extend({
   getValue: function(indexOrDate) {
     var history = this.get('history');
     if (typeof indexOrDate === number) {
-      return history[indexOrDate].close * (this.get('amount') / this.getStartVal()); // scaling factor
+      return history[indexOrDate].close * this.get('nShares'); // scaling factor
     } else {
       var snapshot = _.findWhere(history, {date: indexOrDate});
       if (!snapshot) {
         return null;
       } else {
-        return snapshot.close * (this.get('amount') / this.getStartVal());
+        return snapshot.close * this.get('nShares');
       }
     }
   },
@@ -37,7 +37,7 @@ var StockModel = Backbone.Model.extend({
 
   // the value of the stock at purchase time
   getStartVal: function() {
-    return this.getValue(1);
+    return this.get('amount');
   },
 
   // the value of the stock at the end of the trajectory
