@@ -1,7 +1,7 @@
 // Backbone model for stocks
 var StockModel = Backbone.Model.extend({
 
-  url: 'api/stocks',
+  url: '/api/stocks',
 
   initialize: function(){
 
