@@ -1,0 +1,24 @@
+{
+  "name": "sandworm-hr",
+  "version": "0.0.0",
+  "homepage": "https://github.com/sandworm-hr/sandworm-hr",
+  "authors": [
+    "Tamara Woodson",
+    "Paul Sokolik",
+    "Edwin Lin"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.2.1",
+    "underscore": "~1.8.3",
+    "d3": "~3.5.5",
+    "jquery": "~2.1.4"
+  }
+}
