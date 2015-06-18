@@ -19,6 +19,7 @@ module.exports = function(grunt) {
         force: 'true',
         jshintrc: '.jshintrc',
         ignores: [
+          'client/assets/*.js',
           'node_modules/**/*.js',
           '**/node_modules/**/*.js'
         ]
