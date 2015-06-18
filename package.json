@@ -1,0 +1,30 @@
+{
+  "name": "sandworm-hr",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandworm-hr/sandworm-hr.git"
+  },
+  "keywords": [
+    "stock",
+    "trading"
+  ],
+  "author": "Paul Sokolik, Tamara Woodson, Edwin Lin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sandworm-hr/sandworm-hr/issues"
+  },
+  "homepage": "https://github.com/sandworm-hr/sandworm-hr#readme",
+  "dependencies": {
+    "body-parser": "^1.13.1",
+    "express": "^4.12.4",
+    "morgan": "^1.6.0",
+    "node": "0.0.0"
+  }
+}
