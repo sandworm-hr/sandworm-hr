@@ -15,3 +15,4 @@ app.use(express.static(__dirname + '/client'));
 var port = 8080;
 
 app.listen(port);
+console.log('Listening to: ' + port);
