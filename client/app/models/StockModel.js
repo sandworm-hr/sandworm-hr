@@ -4,7 +4,7 @@ var StockModel = Backbone.Model.extend({
   url: '/api/stocks',
 
   initialize: function(){
-    this.set('nShares', this.get('history')[0].close);
+    this.set('nShares', this.get('amount') / this.get('history')[0].close);
   },
 
   /* given an index or date, returns the value of user's stock at that time
