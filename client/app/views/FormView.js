@@ -27,6 +27,8 @@ var FormView = Backbone.View.extend({
       amount: this.$('#amount').val(),
       to: d.toISOString().slice(0,10), //Just the YYYY-MM-DD portion
     });
+    this.$('#symbol').val('');
+    this.$('#amount').val('');
   },
   
   startSpinner: function(){
