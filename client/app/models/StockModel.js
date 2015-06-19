@@ -17,7 +17,7 @@ var StockModel = Backbone.Model.extend({
   */
   getValue: function(indexOrDate) {
     var history = this.get('history');
-    if (typeof indexOrDate === number) {
+    if (typeof indexOrDate === 'number') {
       return history[indexOrDate].close * this.get('nShares'); // scaling factor
     } else {
       var snapshot = _.findWhere(history, {date: indexOrDate});
