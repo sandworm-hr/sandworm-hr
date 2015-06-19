@@ -19,7 +19,7 @@ module.exports = function(grunt) {
         force: 'true',
         jshintrc: '.jshintrc',
         ignores: [
-          'client/assets/*.js',
+          'client/assets/**/*.js',
           'node_modules/**/*.js',
           '**/node_modules/**/*.js',
           'bower_components/**/*.js',
@@ -78,8 +78,9 @@ module.exports = function(grunt) {
   // Main grunt tasks
   ////////////////////////////////////////////////////
 
-  grunt.registerTask('test', [
-    'jshint'
+  grunt.registerTask('mon', [
+    'jshint',
+    'concurrent'
   ]);
 
 
