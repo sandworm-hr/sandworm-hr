@@ -45,6 +45,7 @@ var StockModel = Backbone.Model.extend({
     return this.getValue(this.get('history').length - 1);
   },
 
+  // returns the stock's history in d3-consumable format
   getTrajectory: function() {
     var context = this;
     return _.map(this.get('history'), function(snapshot, index) {
