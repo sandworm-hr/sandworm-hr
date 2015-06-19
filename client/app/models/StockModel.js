@@ -31,13 +31,13 @@ var StockModel = Backbone.Model.extend({
 
   // may not be needed
   getStartDate: function() {
-    return this.get('history')[0].date;
+    return new Date(this.get('history')[0].date);
   },
 
   // the last date for which we have data (should be close to now)
   getEndDate: function() {
     var history = this.get('history');
-    return history[history.length - 1].date;
+    return new Date(history[history.length - 1].date);
   },
 
   // the value of the stock at purchase time
