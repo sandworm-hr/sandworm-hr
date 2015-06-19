@@ -28,6 +28,23 @@ module.exports = function(grunt) {
       }
     },
 
+    "bower-install-simple": {
+      options: {
+        color: true,
+        directory: 'client/assets'
+      },
+      "prod": {
+        options: {
+          production: true
+        }
+      },
+      "dev": {
+        options: {
+          production: false
+        }
+      }
+    },
+
     watch: {
       scripts: {
         files: [
@@ -55,6 +72,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-bower-install-simple');
 
   ////////////////////////////////////////////////////
   // Main grunt tasks
@@ -68,6 +86,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', [
     'jshint',
+    'bower-install-simple',
     'concurrent'
   ]);
 };

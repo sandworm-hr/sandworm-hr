@@ -24,9 +24,11 @@ var FormView = Backbone.View.extend({
     this.collection.create({
       symbol: this.$('#symbol').val(),
       from: this.$('#date').val(),
-      amount: this.$('#amount').val(),
+      amount: this.$('#symbol').val(),
       to: d.toISOString().slice(0,10), //Just the YYYY-MM-DD portion
     });
+    this.$('#symbol').val('');
+    this.$('#symbol').val('');
   },
   
   startSpinner: function(){
