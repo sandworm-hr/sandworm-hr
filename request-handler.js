@@ -1,23 +1,17 @@
-//Adding request handler file
-
+//include yahooFinance npm module
 var yahooFinance = require('yahoo-finance');
 
-var getStocks = function(/* req,res 
-  */) {
-  // var ticker = req.body.symbol;
-  // var start = req.body.startDate;
-  // var end = req.body.endDate;
+var getStocks = function(req,res) {
+  // use npm yahooFinance library function to instantiate stock request
   yahooFinance.historical({
-    symbol: 'AAPL',//ticker,
-    from: '2015-01-02',//start, //FORMAT: 'YYYY-MM-DD',
-    to: '2015-01-05',//end, //FORMAT: 'YYYY-MM-DD',
-    period: 'd'  // 'd' (daily), 'w' (weekly), 'm' (monthly), 'v' (dividends only) 
+    symbol: req.body.symbol,
+    from: req.body.from, //FORMAT: 'YYYY-MM-DD',
+    to: req.body.to,     //FORMAT: 'YYYY-MM-DD',
+    period: 'd'          // 'd' (daily), 'w' (weekly), 'm' (monthly), 'v' (dividends only) 
   }, function (err, quotes) {
     if(err) return console.log(err);
-    console.log(quotes);
-    // res.json(quotes);
+    res.json(quotes);
   });
-
 };
 
 module.exports.getStocks = getStocks;
