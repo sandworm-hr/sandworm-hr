@@ -50,6 +50,25 @@ var StockModel = Backbone.Model.extend({
     return this.getValue(this.get('history').length - 1);
   },
 
+  // get the max value of the stock
+  getMaxVal: function() {
+    var traj = this.getTrajectory();
+    var maxSnapshot = _.max(traj, function(snapshot) {
+      return snapshot.value;
+    });
+    return maxSnapshot.value;
+  },
+
+  // get the min value of the stock
+  getMinVal: function() {
+    var traj = this.getTrajectory();
+    var minSnapshot = _.min(traj, function(snapshot) {
+      return snapshot.value;
+    });
+    return minSnapshot.value;
+  },
+
+
   // returns the stock's history in d3-consumable format
   getTrajectory: function() {
     var context = this;
