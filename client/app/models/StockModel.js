@@ -3,9 +3,6 @@ var StockModel = Backbone.Model.extend({
 
   url: '/api/stocks',
 
-  initialize: function(){
-  },
-
   parse: function(response) {
     this.set('history', response);
     this.set('amount', parseFloat(this.get('amount')));
