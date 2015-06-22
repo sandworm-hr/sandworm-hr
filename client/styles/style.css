@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
   line-height: 1;
+  /*background-color: #000000;*/
 }
 ol, ul {
   list-style: none;
@@ -72,4 +73,32 @@ input {
   margin: 10px;
   float: right;
   width:  120px;
+}
+
+.info {
+  background-color: #E8E8EE;
+
+}
+
+/*d3 plot styles*/
+.graph {
+  background-color: #E8E8EE;
+  float: right;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
 }
