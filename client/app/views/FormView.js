@@ -1,7 +1,21 @@
 // Backbone view for the stock submission form
 var FormView = Backbone.View.extend({
 
-  className: 'form',
+  className: 'form container',
+
+  divText: '\
+      <div class="container"> \
+        <div class="row"> \
+          <div class="col-md-6 col-md-offset-3 well"> \
+            <form>\
+              <input type="text" id="symbol"><span>Stock Symbol:</span>\
+              <input type="date" id="date"><span>Date:</span>\
+              <input type="text" id="amount"><span>Amount ($)</span>\
+              <input type="submit"/><img src="assets/images/loader.gif">\
+            </form>\
+          </div> \
+        </div> \
+      </div>',
   
   initialize: function(){
     this.render();
@@ -44,13 +58,7 @@ var FormView = Backbone.View.extend({
 
   render: function(){
     //Render main form
-    return this.$el.html('\
-      <form>\
-        <input type="text" id="symbol"><span>Stock Symbol:</span>\
-        <input type="date" id="date"><span>Date:</span>\
-        <input type="text" id="amount"><span>Amount ($)</span>\
-        <input type="submit"/><img src="assets/images/loader.gif">\
-      </form>');
+    return this.$el.html(this.divText);
   }
 
 });
