@@ -3,13 +3,10 @@ var StockModel = Backbone.Model.extend({
 
   url: '/api/stocks',
 
-  initialize: function(){
-  },
-
   parse: function(response) {
     this.set('history', response);
     this.set('amount', parseFloat(this.get('amount')));
-    this.set('nShares', this.get('amount') / this.get('history')[0].close);
+    this.set('nShares', this.get('amount') / this.get('history')[0].adjClose);
   },
 
   /* given an index or date, returns the value of user's stock at that time
@@ -18,13 +15,13 @@ var StockModel = Backbone.Model.extend({
   getValue: function(indexOrDate) {
     var history = this.get('history');
     if (typeof indexOrDate === 'number') {
-      return history[indexOrDate].close * this.get('nShares'); // scaling factor
+      return history[indexOrDate].adjClose * this.get('nShares'); // scaling factor
     } else {
       var snapshot = _.findWhere(history, {date: indexOrDate});
       if (!snapshot) {
         return null;
       } else {
-        return snapshot.close * this.get('nShares');
+        return snapshot.adjClose * this.get('nShares');
       }
     }
   },
