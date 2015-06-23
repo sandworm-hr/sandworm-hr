@@ -80,15 +80,21 @@ var Stocks = Backbone.Collection.extend({
   getAverage: function() {
 
     var normalized = this.normalizeStocks();
+    console.log(normalized);
     var stockRange = _.range(this.length);
     var timeRange = _.range(normalized[0].length);
 
     // for each time point in our range ...
     return _.map(timeRange, function(timeIndex) {
       var aggregated = {};
-
+      var divisor = 0;
+      for (var i = 0; i < normalized.length; i++) {
+        if (normalized[i][timeIndex].value !== 0) {
+          divisor++;
+        }
+      }
       // add up and average the value over all the stocks in the collection
-      aggregated.value = (1 / stockRange.length) * _.reduce(stockRange, function(total, stockIndex) {
+      aggregated.value = (1 / divisor) * _.reduce(stockRange, function(total, stockIndex) {
           return total + normalized[stockIndex][timeIndex].value;
         }, 0);
 
