@@ -1,7 +1,19 @@
 
-  describe('testing the tests', function() {
+  describe('Stocks Collection', function() {
 
-    it('should do something', function() {
+    it('should get the earliest date', function() {
+
+    });
+
+    it('should get the latest date', function() {
+
+    });
+
+    it('should normalize stocks', function() {
+
+    });
+
+    it('should average all the stocks', function() {
 
     });
 
