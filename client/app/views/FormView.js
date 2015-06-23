@@ -6,12 +6,21 @@ var FormView = Backbone.View.extend({
   divText: '\
       <div class="container"> \
         <div class="row"> \
-          <div class="col-md-6 col-md-offset-3 well"> \
-            <form>\
-              <input type="text" id="symbol"><span>Stock Symbol:</span>\
-              <input type="date" id="date"><span>Date:</span>\
-              <input type="text" id="amount"><span>Amount ($)</span>\
-              <input type="submit"/><img src="assets/images/loader.gif">\
+          <div class="col-md-6 col-md-offset-3 well">\
+            <form role="form">\
+              <div class="form-group"> \
+                <label for="symbol">Stock Symbol</label>\
+                <input type="text" id="symbol" class="form-control">\
+              </div> \
+              <div class="form-group"> \
+                <label for="date">Date</label>\
+                <input type="date" id="date" class="form-control">\
+              </div> \
+              <div class="form-group"> \
+                 <label for="date">Amount</label>\
+                $<input type="text" id="amount" class="form-control">\
+              </div> \
+              <button type="submit" class="btn btn-default">Submit</button>\
             </form>\
           </div> \
         </div> \
