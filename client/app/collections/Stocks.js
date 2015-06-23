@@ -40,7 +40,7 @@ var Stocks = Backbone.Collection.extend({
     var traj = stock.getTrajectory();
     var earlyFill = [];
     var lateFill = [];
-    var context = this;
+
 
     // creates an array of zero values to front-pad
     _.each(earliestStock, function(snapshot) {
@@ -78,6 +78,7 @@ var Stocks = Backbone.Collection.extend({
 
   // returns a single array representing the average performance of all stocks between the global max and min dates
   getAverage: function() {
+
     var normalized = this.normalizeStocks();
     var stockRange = _.range(this.length);
     var timeRange = _.range(normalized[0].length);
@@ -89,7 +90,7 @@ var Stocks = Backbone.Collection.extend({
       // add up and average the value over all the stocks in the collection
       aggregated.value = (1 / stockRange.length) * _.reduce(stockRange, function(total, stockIndex) {
           return total + normalized[stockIndex][timeIndex].value;
-        }, normalized[0][timeIndex].value);
+        }, 0);
 
       // to keep the same trajectory format, add date and "symbol" indicating that this is an aggregate
       aggregated.date = normalized[0][timeIndex].date;
