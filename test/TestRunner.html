@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TestRunner for What if? Invest</title>
+    <!-- Dependencies -->
+    <script src="../bower_components/d3/d3.min.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/underscore/underscore-min.js"></script>
+    <script src="../bower_components/backbone/backbone-min.js"></script>
+    <script src="../bower_components/mocha/mocha.js"></script>
+    <script src="../bower_components/chai/chai.js"></script>
+    <link rel="stylesheet" href="../bower_components/mocha/mocha.css">
+
+  </head>
+  <body>
+    <div id="mocha"></div>
+
+    <!-- Models -->
+    <script src="../client/app/models/StockModel.js"></script>
+    <script src="../client/app/models/PortfolioModel.js"></script>
+    <script src="../client/app/models/AppModel.js"></script>
+
+    <!-- Collections -->
+    <script src="../client/app/collections/Stocks.js"></script>
+    <script src="../client/app/collections/Portfolios.js"></script>
+
+    <!-- Views -->
+    <script src="../client/app/views/AppView.js"></script>
+    <script src="../client/app/views/FormView.js"></script>
+    <script src="../client/app/views/StockView.js"></script>
+    <script src="../client/app/views/GraphView.js"></script>
+    <script src="../client/app/views/InfoView.js"></script>
+    <script src="../client/app/views/DashboardView.js"></script>
+
+    <script>
+      mocha.ui('bdd');
+      mocha.reporter('html');
+      var expect = chai.expect;
+    </script>
+    <script src="StockModelSpec.js"></script>
+    <script src="StocksSpec.js"></script>
+    <script>
+      mocha.run();
+    </script>
+  </body>
+</html>
