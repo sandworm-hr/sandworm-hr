@@ -4,10 +4,10 @@ var StockView = Backbone.View.extend({
 
   template: _.template('<div>\
     <span><i class="glyphicon glyphicon-remove"></i></span>\
-    <span>Stock : <%= symbol %></span>\
-    <span>Initial Value : <%= amount %></span>\
-    <span>Final Value : <%= final %></span>\
     <span>Change: <% if (percentage >= 0) { %> UP <% } else { %> DOWN <% } %> <%= Math.abs(percentage) %>%</span>\
+    <span>Final Value : $<%= final.toFixed(2) %></span>\
+    <span>Initial Value : $<%= amount.toFixed(0) %></span>\
+    <span>Stock : <%= symbol %></span>\
     </div> '),
 
   initialize: function() {

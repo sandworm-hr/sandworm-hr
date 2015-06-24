@@ -79,14 +79,20 @@ var FormView = Backbone.View.extend({
     //start spinner upon stock creation
     this.startSpinner(); 
     var d = new Date();
-    /* Create will create a new stock in the collection
-       and send a request for the pertinent information */
-    this.collection.create({
+    var requestStock = {
       symbol: this.$('#symbol').val().toUpperCase(),
       from: this.$('#date').val(),
       amount: this.$('#amount').val(),
-      to: d.toISOString().slice(0,10), //Just the YYYY-MM-DD portion
-    });
+      to: d.toISOString().slice(0,10) //Just the YYYY-MM-DD portion
+    };
+    /* Create will create a new stock in the collection
+       and send a request for the pertinent information */
+    if(this.collection.hasStock(requestStock.symbol)) {
+      console.log('made it');
+      this.collection.updateStock(requestStock);
+    } else {
+      this.collection.create(requestStock);
+    }
     this.$('#symbol').val('');
     this.$('#amount').val('');
   },
