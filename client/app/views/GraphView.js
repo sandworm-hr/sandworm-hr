@@ -4,10 +4,8 @@ var GraphView = Backbone.View.extend({
   className: 'graph',
 
   initialize: function() {
-    // this.render();
-    this.collection.on('sync', function() {
-      this.render();
-    }, this);
+    this.collection.on('sync', this.render, this);
+    this.collection.on ('remove', this.render, this);
   },
 
   plotLine: function(stocks) {
@@ -19,8 +17,6 @@ var GraphView = Backbone.View.extend({
         innerHeight = outerHeight - margin.top - margin.bottom,
         width = innerWidth - padding.left - padding.right,
         height = innerHeight - padding.top - padding.bottom;
-        // width = 960 - margin.left - margin.right,
-        // height = 500 - margin.top - margin.bottom;
 
     var bisectDate = d3.bisector(function(d) { return d.date; }).left;
     var formatValue = d3.format(",.2f");
@@ -141,8 +137,10 @@ var GraphView = Backbone.View.extend({
 
   render: function() {
     this.$el.children().detach();
-    this.plotLine(this.collection, this);
-    return this.$el;
+    if (this.collection.length > 0) {  
+      this.plotLine(this.collection, this);
+      return this.$el;
+    }
   }
 
 });

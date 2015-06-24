@@ -5,6 +5,13 @@ var Stocks = Backbone.Collection.extend({
 
   model: StockModel,
 
+  initialize: function () {
+    this.on('clicked', this.removeStock, this);
+  },
+  
+  removeStock: function(stock) {
+    this.remove(stock);
+  },
   // returns the latest date associated with any stock in the collection (shoud be roughly today)
   // note that "stocks" is a part of the variable name to avoid confusion with model methods
   getStocksMaxDate: function() {
