@@ -80,7 +80,6 @@ var Stocks = Backbone.Collection.extend({
   getAverage: function() {
 
     var normalized = this.normalizeStocks();
-    console.log(normalized);
     var stockRange = _.range(this.length);
     var timeRange = _.range(normalized[0].length);
 

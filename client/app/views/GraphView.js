@@ -15,6 +15,10 @@ var GraphView = Backbone.View.extend({
     var width = 960 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
+    var bisectDate = d3.bisector(function(d) { return d.date; }).left;
+    var formatValue = d3.format(",.2f");
+    var formatCurrency = function(d) { return "$" + formatValue(d); };
+
     var Xrange = [0,width];
     var Yrange = [height, 0];
 
@@ -65,7 +69,6 @@ var GraphView = Backbone.View.extend({
         .text("Price ($)");
 
     lineData.forEach(function(stock, index) {
-      console.log(stock[0].symbol);
       svg.append("path")
           .datum(stock)
           .attr("class", "line " + stock[0].symbol)
@@ -74,6 +77,45 @@ var GraphView = Backbone.View.extend({
             return colors((index)%20);
           });
     });
+
+    var mousemove = function() {
+      var x0 = x.invert(d3.mouse(this)[0]);
+      var y0 = y.invert(d3.mouse(this)[1]);
+      var closest;
+      var max = Number.MAX_VALUE;
+      for (var i = 0; i < lineData.length; i++) {
+        var bis = bisectDate(lineData[i], x0, 1);
+        var distance = Math.abs(lineData[i][bis].value - y0);
+        if ( distance < max && lineData[i][bis].value !== 0) {
+          max = distance;
+          closest = lineData[i][bis];
+        }
+      }
+      focus.attr("transform", "translate(" + x(closest.date) + "," + y(closest.value) + ")");
+      focus.select("text").text(closest.symbol + " : " + formatCurrency(closest.value));
+    };
+
+    var focus = svg.append("g")
+          .attr("class", "focus")
+          .style("display", "none");
+
+      focus.append("circle")
+          .attr("r", 4.5);
+
+      focus.append("text")
+          .attr("x", 9)
+          .attr("dy", ".35em")
+          .attr("font-family", "sans-serif")
+          .attr("fill", '#060');
+
+      svg.append("rect")
+          .attr("class", "overlay")
+          .attr("width", width)
+          .attr("height", height)
+          .on("mouseover", function() { focus.style("display", null); })
+          .on("mouseout", function() { focus.style("display", "none"); })
+          .on("mousemove", mousemove);
+
 
   },
 
