@@ -99,7 +99,7 @@ var Stocks = Backbone.Collection.extend({
 
       // to keep the same trajectory format, add date and "symbol" indicating that this is an aggregate
       aggregated.date = normalized[0][timeIndex].date;
-      aggregated.symbol = 'all';
+      aggregated.symbol = 'average';
       return aggregated;
     });
   }
