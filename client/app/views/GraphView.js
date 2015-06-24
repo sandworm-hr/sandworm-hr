@@ -11,9 +11,16 @@ var GraphView = Backbone.View.extend({
   },
 
   plotLine: function(stocks) {
-    var margin = {top: 20, right: 10, bottom: 20, left: 10};
-    var width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+    var margin = {top: 20, right: 10, bottom: 20, left: 10},
+        padding = {top: 10, right: 10, bottom: 10, left: 10},
+        outerWidth = 960,
+        outerHeight = 500,
+        innerWidth = outerWidth - margin.left - margin.right,
+        innerHeight = outerHeight - margin.top - margin.bottom,
+        width = innerWidth - padding.left - padding.right,
+        height = innerHeight - padding.top - padding.bottom;
+        // width = 960 - margin.left - margin.right,
+        // height = 500 - margin.top - margin.bottom;
 
     var bisectDate = d3.bisector(function(d) { return d.date; }).left;
     var formatValue = d3.format(",.2f");
@@ -36,15 +43,23 @@ var GraphView = Backbone.View.extend({
         .x(function(d) { return x(d.date); })
         .y(function(d) { return y(d.value); });
 
-    var svg = d3.select('.graph').append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    var lineData = stocks.normalizeStocks();
+    var lineData = stocks.map(function(stock) {
+      return stock.getTrajectory();
+    });
     var averageStocks = stocks.getAverage();
     lineData.push(averageStocks);
+
+    var left = margin.left + padding.left;
+    var bottom = margin.bottom + padding.bottom;
+    var maxY = d3.max(lineData, function(stock) { return d3.max(stock, function(d) { return d.value; }); });
+    var maxYLen = (Math.round(maxY)).toString().length * 14;
+
+    var svg = d3.select('.graph').append("svg")
+        .attr("width", outerWidth)
+        .attr("height", outerHeight)
+        .append("g")
+        .attr("transform", "translate(" + maxYLen + "," + bottom + ")");
+
 
     var colors = d3.scale.category10();
     x.domain(d3.extent(averageStocks, function(d) {return d.date; }));
@@ -62,6 +77,7 @@ var GraphView = Backbone.View.extend({
         .attr("class", "y axis")
         .call(yAxis)
         .append("text")
+        .attr("transform", "translate(" + width + ",0)")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
         .attr("dy", ".71em")
@@ -74,7 +90,11 @@ var GraphView = Backbone.View.extend({
           .attr("class", "line " + stock[0].symbol)
           .attr("d", lineFunction)
           .style("stroke", function (d) {
-            return colors((index)%20);
+            if(stock[0].symbol === 'all') {
+              return 'black';
+            } else {
+              return colors((index)%20);
+            }
           });
     });
 
@@ -86,13 +106,13 @@ var GraphView = Backbone.View.extend({
       for (var i = 0; i < lineData.length; i++) {
         var bis = bisectDate(lineData[i], x0, 1);
         var distance = Math.abs(lineData[i][bis].value - y0);
-        if ( distance < max && lineData[i][bis].value !== 0) {
+        if ( distance <= max && lineData[i][bis].value !== 0) {
           max = distance;
           closest = lineData[i][bis];
         }
       }
       focus.attr("transform", "translate(" + x(closest.date) + "," + y(closest.value) + ")");
-      focus.select("text").text(closest.symbol + " : " + formatCurrency(closest.value));
+      focus.select("text").text(closest.symbol.toUpperCase() + " : " + formatCurrency(closest.value));
     };
 
     var focus = svg.append("g")
