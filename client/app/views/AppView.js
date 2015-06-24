@@ -3,7 +3,7 @@ var AppView = Backbone.View.extend({
 
   el:'#main',
 
-  navDiv: '<nav class="navbar navbar-default navbar-static-top"> \
+  navDiv: '<nav class="navbar navbar-inverse navbar-static-top"> \
                              <div class="container-fluid"> \
                                <a href="/" class="navbar-brand">Portfol.io</a> \
                                <ul class="nav nav-pills navbar-nav navbar-right"> \
