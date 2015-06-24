@@ -22,6 +22,7 @@
     "jquery": "~2.1.4",
     "bootstrap": "~3.3.5",
     "mocha": "~2.2.5",
-    "chai": "~3.0.0"
+    "chai": "~3.0.0",
+    "backbone-validation": "~0.11.5"
   }
 }
