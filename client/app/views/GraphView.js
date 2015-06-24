@@ -11,8 +11,8 @@ var GraphView = Backbone.View.extend({
   plotLine: function(stocks) {
     var margin = {top: 20, right: 10, bottom: 20, left: 10},
         padding = {top: 10, right: 10, bottom: 10, left: 10},
-        outerWidth = 960,
-        outerHeight = 500,
+        outerWidth = 750,
+        outerHeight = 250,
         innerWidth = outerWidth - margin.left - margin.right,
         innerHeight = outerHeight - margin.top - margin.bottom,
         width = innerWidth - padding.left - padding.right,

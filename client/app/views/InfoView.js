@@ -4,9 +4,9 @@ var InfoView = Backbone.View.extend({
   className: 'info',
 
   template: _.template('<div>\
-    <span> Portfolio Initial Value : <%= start %></span>\
-    <span> Portfolio Final Value : <%= end %></span>\
     <span>Change: <% if (percentage >= 0) { %> UP <% } else { %> DOWN <% } %> <%= Math.abs(percentage) %>%</span>\
+    <span> Portfolio Final Value : $<%= end.toFixed(2) %></span>\
+    <span> Portfolio Initial Value : $<%= start.toFixed(0) %></span>\
     </div> '),
 
   initialize: function() {
