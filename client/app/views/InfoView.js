@@ -22,9 +22,18 @@ var InfoView = Backbone.View.extend({
     this.collection.on('sync edited remove', this.render, this);
   },
 
+  events: {
+    'click button' : 'savePortfolio'
+  },
+
+  savePortfolio: function() {
+    new PortfolioModel({collection: this.collection, name: this.$('#pname').val()});
+  },
+
   render: function() {
     this.$el.children().empty();
-    var headerText = '<h1 class="info-view-title">Summary</h1><div class="stock-views-container text-left"></div>';
+    this.delegateEvents();
+    var headerText = '<input type="text" id="pname" placeholder="Portfolio name"><button>Save</button><h1 class="info-view-title">Summary</h1><div class="stock-views-container text-left"></div>';
 
     if (this.collection.length > 0) {
       var port = {};

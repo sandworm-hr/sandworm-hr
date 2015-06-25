@@ -48,8 +48,8 @@ db.knex.schema.hasTable('stocks').then(function(exists) {
       stock.integer('portfolios_id').unsigned().references('id').inTable('portfolios');
       stock.string('symbol', 20);
       stock.integer('amount', 255);
-      stock.string('start_date', 10);
-      stock.string('end_date', 10);
+      stock.string('from', 10);
+      stock.string('to', 10);
       stock.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
