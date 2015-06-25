@@ -6,7 +6,10 @@ var StockModel = Backbone.Model.extend({
   parse: function(response) {
     this.set('history', response);
     this.set('amount', parseFloat(this.get('amount')));
-    this.set('nShares', this.get('amount') / this.get('history')[0].adjClose);
+    var nShares = this.get('amount') / this.get('history')[0].adjClose;
+    _.each(this.get('history'), function(snapshot) {
+      snapshot.nShares = nShares;
+    });
   },
 
   /* given an index or date, returns the value of user's stock at that time
@@ -15,15 +18,50 @@ var StockModel = Backbone.Model.extend({
   getValue: function(indexOrDate) {
     var history = this.get('history');
     if (typeof indexOrDate === 'number') {
-      return history[indexOrDate].adjClose * this.get('nShares'); // scaling factor
+      return history[indexOrDate].adjClose * history[indexOrDate].nShares; // scaling factor
     } else {
       var snapshot = _.findWhere(history, {date: indexOrDate});
       if (!snapshot) {
         return null;
       } else {
-        return snapshot.adjClose * this.get('nShares');
+        return snapshot.adjClose * snapshot.nShares;
       }
     }
+  },
+
+  update: function(history, amount){
+    var context = this;
+    var nShares = amount / history[0].adjClose;
+
+    _.each(history, function(snapshot) {
+      snapshot.nShares = nShares;
+    });
+    debugger;
+    var existingIndex = _.findIndex(history, function(snapshot) {
+      return (new Date(snapshot.date) >= context.getStartDate());
+    });
+    var firstExisting = history[existingIndex];
+    var earlyHistory = history.slice(0, existingIndex);
+
+    var updatedHistory = earlyHistory.concat(this.get('history'));
+    this.set('history', updatedHistory);
+    this.addTo(firstExisting.date, amount);
+  },
+
+  // adds to stock assuming that stock already exists in portfolio 
+  addTo: function(startDate, amount) {
+    var context = this;
+    var firstExisting = _.find(this.get('history'), function(snapshot) {
+      return (new Date(startDate) >= new Date(snapshot.date));
+    });
+    var nShares = amount / firstExisting.adjClose;
+    _.each(this.get('history'), function(snapshot) {
+      var date = new Date(snapshot.date);
+      if (startDate <= date) {
+        snapshot.nShares = snapshot.nShares + nShares;
+      }
+    });
+    this.trigger('edited', this);
   },
 
   // may not be needed
