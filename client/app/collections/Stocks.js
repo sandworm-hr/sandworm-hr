@@ -9,20 +9,20 @@ var Stocks = Backbone.Collection.extend({
     this.on('clicked', this.removeStock, this);
   },
 
-  hasStock: function(symbol) {
+  findStock: function(symbol) {
     var found = this.find(function(stock) {
       console.log(stock);
       return stock.attributes.symbol === symbol;
     });
-    return found ? true : false;
+    return found;
   },
 
-  updateStock: function(requestStock) {
-    this.fetch(requestStock).done(function(resp) {
-      console.log(resp);
-    });
+  getNewStockTrajectory: function(requestStock) {
+    var stockModel = new StockModel(requestStock);
+    var stockPromise = stockModel.fetch({data:requestStock, type:'POST'});
+    return stockPromise;
   },
-  
+
   removeStock: function(stock) {
     this.remove(stock);
   },
