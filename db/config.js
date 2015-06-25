@@ -15,16 +15,13 @@ var knex = require('knex')({
 });
 var db = require('bookshelf')(knex);
 
-db.knex.schema.hasTable('stocks').then(function(exists) {
+db.knex.schema.hasTable('users').then(function(exists) {
   if (!exists) {
-    db.knex.schema.createTable('stocks', function (stock) {
-      stock.increments('id').primary();
-      stock.integer('portfolio_id', 255).references('id').inTable('portfolios');
-      stock.string('symbol', 20);
-      stock.integer('amount', 255);
-      stock.string('start_date', 10);
-      stock.string('end_date', 10);
-      stock.timestamps();
+    db.knex.schema.createTable('users', function (user) {
+      user.increments('id').primary();
+      user.string('username', 100).unique();
+      user.string('password', 255);
+      user.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
@@ -36,7 +33,7 @@ db.knex.schema.hasTable('portfolios').then(function(exists) {
     db.knex.schema.createTable('portfolios', function (portfolio) {
       portfolio.increments('id').primary();
       portfolio.string('name', 100);
-      portfolio.integer('user_id').references('id').inTable('users');
+      portfolio.integer('users_id').unsigned().references('id').inTable('users');
       portfolio.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
@@ -44,13 +41,16 @@ db.knex.schema.hasTable('portfolios').then(function(exists) {
   }
 });
 
-db.knex.schema.hasTable('users').then(function(exists) {
+db.knex.schema.hasTable('stocks').then(function(exists) {
   if (!exists) {
-    db.knex.schema.createTable('users', function (user) {
-      user.increments('id').primary();
-      user.string('username', 100).unique();
-      user.string('password', 255);
-      user.timestamps();
+    db.knex.schema.createTable('stocks', function (stock) {
+      stock.increments('id').primary();
+      stock.integer('portfolios_id').unsigned().references('id').inTable('portfolios');
+      stock.string('symbol', 20);
+      stock.integer('amount', 255);
+      stock.string('start_date', 10);
+      stock.string('end_date', 10);
+      stock.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });

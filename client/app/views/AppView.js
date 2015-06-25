@@ -25,7 +25,10 @@ var AppView = Backbone.View.extend({
   },
 
   render: function(){
-    return this.$el.html([
+    this.$el.empty();
+    this.formView.delegateEvents();
+    this.dashboardView.delegateEvents();
+    this.$el.append([
       $(this.navDiv),
       this.formView.$el,
       this.dashboardView.$el
@@ -33,7 +36,10 @@ var AppView = Backbone.View.extend({
   },
 
   signup: function() {
-    return this.$el.html([
+    this.$el.empty();
+    this.signupView.delegateEvents();
+    this.dashboardView.delegateEvents();
+    this.$el.append([
       $(this.navDiv),
       this.signupView.$el,
       this.dashboardView.$el
@@ -41,7 +47,10 @@ var AppView = Backbone.View.extend({
   },
 
   signin: function() {
-    return this.$el.html([
+    this.$el.empty();
+    this.signinView.delegateEvents();
+    this.dashboardView.delegateEvents();
+    this.$el.append([
       $(this.navDiv),
       this.signinView.$el,
       this.dashboardView.$el

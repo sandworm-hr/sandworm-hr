@@ -11,7 +11,7 @@ var SigninView = Backbone.View.extend({
             <form data-toggle="validator" role="form">\
               <div class="form-group"> \
                 <label for="username">Username</label>\
-                <input pattern="[a-zA-Z0-9]" minlength="5" type="text" id="username" class="form-control" data-error="Invalid Username" required>\
+                <input pattern="[a-zA-Z0-9]{5,15}" minlength="5" type="text" id="username" class="form-control" data-error="Invalid Username" required>\
                 <div class="help-block with-errors">Username of 5-15 alphanumeric characters</div>\
               </div> \
               <div class="form-group"> \
@@ -46,6 +46,15 @@ var SigninView = Backbone.View.extend({
       username: this.$('#username').val(),
       password: this.$('#password').val(),
     };
+
+    $.ajax({
+      url: "/signin",
+      type: "POST",
+      data: userSignin,
+      success: function () {
+        //window.location.hash = 'front';
+      },
+    });
 
     //Sign in new user
   },
