@@ -77,7 +77,7 @@ var GraphView = Backbone.View.extend({
         .attr("y", 6)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
-        .text("Price ($)");
+        .text("Value ($)");
 
     lineData.forEach(function(stock, index) {
       svg.append("path")
@@ -91,7 +91,15 @@ var GraphView = Backbone.View.extend({
               return colors((index)%20);
             }
           });
-    });
+
+      if(stock[0].symbol !== 'average') {
+        svg.append("text")
+            .attr("transform", "translate(" + 600 + "," + y(stock[stock.length-1].value + 10)  + ")")
+            .attr("dy", ".35em")
+            .attr("text-anchor", "start")
+            .text(stock[0].symbol);
+        }
+     });
 
     var mousemove = function() {
       var x0 = x.invert(d3.mouse(this)[0]);
