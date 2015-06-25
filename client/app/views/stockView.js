@@ -1,26 +1,21 @@
 // Backbone view for stock information
 var StockView = Backbone.View.extend({
 
-
-  divText: _.template('\
-    <div class="info-item">\
-      <h2><%= symbol %></h2>\
-        <ul>\
-          <li> Initial Value : $<%= amount.toFixed(0) %></li>\
-          <li> Final Value : $<%= final.toFixed(2) %></li>\
-          <li> Change: <% if (percentage >= 0) { %> UP <% } else { %> DOWN <% } %> <%= Math.abs(percentage) %>%</li>\
-          <span><i class="glyphicon glyphicon-remove"></i></span>\
-        </ul>\
-    </div>\
-  '),
-
   template: _.template('\
-    <span><i class="glyphicon glyphicon-remove"></i></span>\
-    <span>Change: <% if (percentage >= 0) { %> UP <% } else { %> DOWN <% } %> <%= Math.abs(percentage) %>%</span>\
-    <span>Final Value : $<%= final.toFixed(2) %></span>\
-    <span>Initial Value : $<%= amount.toFixed(0) %></span>\
-    <span>Stock : <%= symbol %></span>\
-    '),
+     <div class="info-item row">\
+       <div class="info-subtitle col-md-2 col-md-offset-1"><%= symbol %></div>\
+       <div class="col-md-4 col-md-offset-1">\
+         <div class="stock-summary">\
+           <div class="info-stat"> <strong>Initial Value</strong>: $<%= amount.toFixed(0) %></div>\
+           <div class="info-stat"> <strong>Final Value</strong>: $<%= final.toFixed(2) %></div>\
+         </div>\
+       </div>\
+       <div class="trend-stats col-md-2">\
+         <i class="glyphicon glyphicon-arrow-<% if (percentage >= 0) { %>up up-icon<% } else { %>down down-icon<% } %>"></i><%= Math.abs(percentage) %>%\
+       </div>\
+      <div class="col-md-2"><i class="glyphicon glyphicon-remove remove-icon"></i></div>\
+    </div>'),
+
 
   initialize: function() {
     var stock = this.model;
@@ -31,7 +26,7 @@ var StockView = Backbone.View.extend({
 
 
   render: function() {
-    return this.$el.html(this.divText(
+    return this.$el.html(this.template(
       _.extend(this.model.attributes, {
       'final': this.model.getEndVal(), 
       'percentage': Math.round(((this.model.getEndVal()/this.model.getStartVal()) - 1)*100)

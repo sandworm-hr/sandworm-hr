@@ -82,7 +82,45 @@ label {
   float: right;
   border: 1px solid black;
   margin-bottom: 10px;
-  /*margin-right: 10px;*/
+  border-radius: 4px;
+}
+
+.info-view {
+  height: 254px;
+  overflow-y: scroll;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.info-view-title {
+  font-size: 24px;
+}
+
+.info-subtitle {
+  font-size: 18px;
+}
+
+.info-item {
+  margin-top: 15px;
+}
+
+.trend-stats {
+  font-size: 16px;
+}
+
+.remove-icon {
+  color: rgb(202, 80, 80);
+  cursor: pointer;
+}
+
+.down-icon {
+  color: red;
+  margin-right: 5px;
+}
+
+.up-icon {
+  color: green;
+  margin-right:5px;
 }
 
 .axis path,
@@ -114,4 +152,16 @@ text.tag {
 .focus circle {
   fill: none;
   stroke: steelblue;
+}
+
+
+/*boilerplate to show scroll bar*/
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
