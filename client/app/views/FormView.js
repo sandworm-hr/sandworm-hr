@@ -24,7 +24,7 @@ var FormView = Backbone.View.extend({
                  <div class="help-block with-errors"></div>\
               </div> \
               <button type="submit" class="btn btn-xs submit-button">Submit</button>\
-              <img src="assets/images/loader.gif">\
+              <img id="spinner" src="assets/images/loader.gif">\
             </form>\
           </div> \
         </div> \
@@ -119,11 +119,13 @@ var FormView = Backbone.View.extend({
   },
   
   startSpinner: function(){
-    this.$('img').show();
+    this.$('#spinner').show();
+    this.$('.submit-button').hide();
   },
 
   stopSpinner: function(){
-    this.$('img').hide();;
+    this.$('#spinner').hide();
+    this.$('.submit-button').show();
   },
 
 
