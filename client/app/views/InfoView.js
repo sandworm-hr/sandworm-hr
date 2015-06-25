@@ -3,18 +3,8 @@ var InfoView = Backbone.View.extend({
 
   className: 'info info-view col-md-5 text-center',
 
-  // divText: _.template('\
-  //   <div class="info-item">\
-  //     <h2 class="info-subtitle">Total</h2>\
-  //       <ul class="stock-summary">\
-  //         <li> <strong>Portfolio Initial Value</strong>: $<%= start.toFixed(0) %></li>\
-  //         <li> <strong>Portfolio Final Value</strong>: $<%= end.toFixed(2) %></li>\
-  //         <li> <strong>Change</strong>: <% if (percentage >= 0) { %> UP <% } else { %> DOWN <% } %> <%= Math.abs(percentage) %>%</li>\
-  //       </ul>\
-  //   </div>\
-  // '),
 
-  divText: _.template('<div class="info-item row">\
+  template: _.template('<div class="info-item row">\
                          <div class="info-subtitle col-md-2 col-md-offset-1">Total</div>\
                          <div class="col-md-4 col-md-offset-1">\
                            <div class="stock-summary">\
@@ -27,26 +17,6 @@ var InfoView = Backbone.View.extend({
                          </div>\
                       </div>'),
 
-
-  // divText: _.template('\
-  //   <div class="info-item row">\
-  //     <div class="info-subtitle col-md-2 col-md-offset-1"><%= symbol %></div>\
-  //     <div class="col-md-4 col-md-offset-1">\
-  //       <div class="stock-summary">\
-  //         <div> <strong>Initial Value</strong>: $<%= amount.toFixed(0) %></div>\
-  //         <div> <strong>Final Value</strong>: $<%= final.toFixed(2) %></div>\
-  //         <div> <strong>Change</strong>: <% if (percentage >= 0) { %> UP <% } else { %> DOWN <% } %> <%= Math.abs(percentage) %>%</div>\
-  //       </div>\
-  //     </div>\
-  //     <div class="col-md-2 col-md-offset-1"><i class="glyphicon glyphicon-remove remove-icon"></i></div>\
-  //   </div>\
-  // '),
-
-  template: _.template('<div>\
-    <span>Change: <% if (percentage >= 0) { %> UP <% } else { %> DOWN <% } %> <%= Math.abs(percentage) %>%</span>\
-    <span> Portfolio Final Value : $<%= end.toFixed(2) %></span>\
-    <span> Portfolio Initial Value : $<%= start.toFixed(0) %></span>\
-    </div> '),
 
   initialize: function() {
     this.collection.on('sync edited remove', this.render, this);
@@ -68,7 +38,7 @@ var InfoView = Backbone.View.extend({
       port.percentage = Math.round((port.end/port.start - 1) * 100);
     }
     this.$el.html(headerText);
-    this.$el.find('.stock-views-container').html(this.divText(port));
+    this.$el.find('.stock-views-container').html(this.template(port));
     this.$el.find('.stock-views-container').append(stocks);
   }
 
