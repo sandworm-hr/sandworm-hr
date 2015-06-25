@@ -17,7 +17,6 @@
   });
 
   router.on('route:portfolios',function(test){
-    console.log(test);
     appView.render();
   });
 

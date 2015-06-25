@@ -55,6 +55,15 @@ var AppView = Backbone.View.extend({
       this.signinView.$el,
       this.dashboardView.$el
     ]);
+  },
+
+  portfolios: function () {
+    this.$el.empty();
+    this.portfoliosView = new PortfoliosView();
+    this.$el.append([
+      $(this.navDiv),
+      this.portfoliosView.$el
+    ]);
   }
 
 });

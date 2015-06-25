@@ -26,7 +26,6 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/client'));
-// var stockRouter = express.Router();
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -74,7 +73,6 @@ app.post('/signin',
 );
 
 app.post('/signup', function(req, res){
-  console.log(req.session);
   var username = req.body.username;
   var password = req.body.password;
   new User({username: username}).fetch().then(function(found){
@@ -95,9 +93,19 @@ app.post('/signup', function(req, res){
 
 });
 
+app.post('/portfolios', function(req, res) {
+  var name = req.body.name;
+  var id = req.user.id;
+  new Portfolio({'name': name, 'users_id': id}).save().then(function(newPortfolio) {
+    res.send(newPortfolio);
+  });
+});
 
-
-
+app.post('/stock', function(req, res) {
+  new Stock(req.body).save().then(function(newStock) {
+    res.send(newStock);
+  });
+});
 
 app.use('/api/stocks', handler.getStocks);
 
