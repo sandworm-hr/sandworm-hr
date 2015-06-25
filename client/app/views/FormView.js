@@ -84,9 +84,11 @@ var FormView = Backbone.View.extend({
     var startDate = new Date(params.from);
     if (existingStock) {
       if (existingStock.getStartDate() <= startDate) {
+          // no need to make an addtional API call; just adds shares to the stock
+          // starting with the new start date
           existingStock.addTo(startDate, parseFloat(params.amount));
-          debugger;
       } else {
+        // makes API call to get earlier stock history, then updates model
         stocks.getNewStockTrajectory(params).then(function(resp) {
           existingStock.update(resp, parseFloat(params.amount));
         });

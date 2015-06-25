@@ -29,6 +29,7 @@ var StockModel = Backbone.Model.extend({
     }
   },
 
+  // adds previous history to an existing stock
   update: function(history, amount){
     var context = this;
     var nShares = amount / history[0].adjClose;
@@ -36,7 +37,6 @@ var StockModel = Backbone.Model.extend({
     _.each(history, function(snapshot) {
       snapshot.nShares = nShares;
     });
-    debugger;
     var existingIndex = _.findIndex(history, function(snapshot) {
       return (new Date(snapshot.date) >= context.getStartDate());
     });
@@ -48,7 +48,7 @@ var StockModel = Backbone.Model.extend({
     this.addTo(firstExisting.date, amount);
   },
 
-  // adds to stock assuming that stock already exists in portfolio 
+  // adds shares to existing stock with a complete history
   addTo: function(startDate, amount) {
     var context = this;
     var firstExisting = _.find(this.get('history'), function(snapshot) {
