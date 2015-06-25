@@ -69,7 +69,7 @@ var FormView = Backbone.View.extend({
     //stop loading spinner on page load
     this.stopSpinner(); 
     //stop spinner upon request completion
-    this.collection.on('sync', this.stopSpinner, this); 
+    this.collection.on('sync edited', this.stopSpinner, this); 
   },
 
   events: {
@@ -88,6 +88,7 @@ var FormView = Backbone.View.extend({
           // starting with the new start date
           existingStock.addTo(startDate, parseFloat(params.amount));
       } else {
+        this.startSpinner();
         // makes API call to get earlier stock history, then updates model
         stocks.getNewStockTrajectory(params).then(function(resp) {
           existingStock.update(resp, parseFloat(params.amount));
