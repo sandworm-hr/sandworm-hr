@@ -62,20 +62,27 @@ img {
   padding: 10px;
 }
 
+label {
+  font-weight: 200;
+  font-size: 12px;
+}
+
 #select-form {
   background-color: #222;
   color: white;
 }
 
-.info {
+/*.info {
   background-color: #E8E8EE;
-
-}
+}*/
 
 /*d3 plot styles*/
 .graph {
   background-color: #FFFBFF;
   float: right;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  /*margin-right: 10px;*/
 }
 
 .axis path,

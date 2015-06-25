@@ -6,7 +6,7 @@ var FormView = Backbone.View.extend({
   divText: '\
       <div class="container"> \
         <div class="row"> \
-          <div class="col-md-4 col-md-offset-4 well text-center" id="select-form">\
+          <div class="col-sm-4 col-sm-offset-4 well text-center" id="select-form">\
             <form data-toggle="validator" role="form">\
               <div class="form-group"> \
                 <label for="symbol">Stock Symbol</label>\
@@ -23,7 +23,7 @@ var FormView = Backbone.View.extend({
                  <input type="number" id="amount" class="form-control" data-error="Invalid amount" required>\
                  <div class="help-block with-errors"></div>\
               </div> \
-              <button type="submit" class="btn btn-default">Submit</button>\
+              <button type="submit" class="btn btn-xs submit-button">Submit</button>\
               <img src="assets/images/loader.gif">\
             </form>\
           </div> \

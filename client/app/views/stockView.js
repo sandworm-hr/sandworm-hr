@@ -2,13 +2,25 @@
 var StockView = Backbone.View.extend({
 
 
-  template: _.template('<div>\
+  divText: _.template('\
+    <div class="info-item">\
+      <h2><%= symbol %></h2>\
+        <ul>\
+          <li> Initial Value : $<%= amount.toFixed(0) %></li>\
+          <li> Final Value : $<%= final.toFixed(2) %></li>\
+          <li> Change: <% if (percentage >= 0) { %> UP <% } else { %> DOWN <% } %> <%= Math.abs(percentage) %>%</li>\
+          <span><i class="glyphicon glyphicon-remove"></i></span>\
+        </ul>\
+    </div>\
+  '),
+
+  template: _.template('\
     <span><i class="glyphicon glyphicon-remove"></i></span>\
     <span>Change: <% if (percentage >= 0) { %> UP <% } else { %> DOWN <% } %> <%= Math.abs(percentage) %>%</span>\
     <span>Final Value : $<%= final.toFixed(2) %></span>\
     <span>Initial Value : $<%= amount.toFixed(0) %></span>\
     <span>Stock : <%= symbol %></span>\
-    </div> '),
+    '),
 
   initialize: function() {
     var stock = this.model;
@@ -19,7 +31,7 @@ var StockView = Backbone.View.extend({
 
 
   render: function() {
-    return this.$el.html(this.template(
+    return this.$el.html(this.divText(
       _.extend(this.model.attributes, {
       'final': this.model.getEndVal(), 
       'percentage': Math.round(((this.model.getEndVal()/this.model.getStartVal()) - 1)*100)

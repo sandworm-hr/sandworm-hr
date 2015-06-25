@@ -4,14 +4,13 @@ var GraphView = Backbone.View.extend({
   className: 'graph',
 
   initialize: function() {
-    this.collection.on('sync', this.render, this);
-    this.collection.on ('remove', this.render, this);
+    this.collection.on('sync edited remove', this.render, this);
   },
 
   plotLine: function(stocks) {
     var margin = {top: 20, right: 10, bottom: 20, left: 10},
         padding = {top: 10, right: 10, bottom: 10, left: 10},
-        outerWidth = 750,
+        outerWidth = 700,
         outerHeight = 250,
         innerWidth = outerWidth - margin.left - margin.right,
         innerHeight = outerHeight - margin.top - margin.bottom,
@@ -86,7 +85,7 @@ var GraphView = Backbone.View.extend({
           .attr("class", "line " + stock[0].symbol)
           .attr("d", lineFunction)
           .style("stroke", function (d) {
-            if(stock[0].symbol === 'all') {
+            if(stock[0].symbol === 'average') {
               return 'black';
             } else {
               return colors((index)%20);
