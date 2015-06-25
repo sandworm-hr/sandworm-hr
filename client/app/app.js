@@ -16,4 +16,13 @@
     appView.signin();
   });
 
+  router.on('route:portfolios',function(test){
+    console.log(test);
+    appView.render();
+  });
+
+  router.on('route:about',function(){
+    appView.render();
+  });
+
   Backbone.history.start();

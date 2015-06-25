@@ -54,7 +54,7 @@ var SignupView = Backbone.View.extend({
       data: userSignup,
       success: function (result) {
         console.log(result);
-        window.location.hash = 'signin';
+        window.location.hash = 'front';
         context.stopSpinner();
       },
       error: function(error) {
