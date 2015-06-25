@@ -1,6 +1,20 @@
 //include yahooFinance npm module
 var yahooFinance = require('yahoo-finance');
 
+var signupLogin = function(req,res) {
+  console.log('here in signup - redirect');
+  res.redirect('/login');
+};
+
+var login = function(req,res) {
+  console.log('in GET login - render');
+  res.render('index.html');
+};
+
+var signup = function(req,res) {
+  // res.render('SignupView.js');
+};
+
 var getStocks = function(req,res) {
   // use npm yahooFinance library function to instantiate stock request
   yahooFinance.historical({
@@ -14,4 +28,7 @@ var getStocks = function(req,res) {
   });
 };
 
+module.exports.signupLogin = signupLogin;
+module.exports.signup = signup;
+module.exports.login = login;
 module.exports.getStocks = getStocks;

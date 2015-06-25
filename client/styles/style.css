@@ -62,9 +62,19 @@ img {
   padding: 10px;
 }
 
+label {
+  font-weight: 200;
+}
+
 #select-form {
   background-color: #222;
   color: white;
+}
+
+#login {
+  margin-bottom: 15px;
+  font-weight: 400;
+  font-size: 25px;
 }
 
 .info {

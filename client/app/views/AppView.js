@@ -15,16 +15,19 @@ var AppView = Backbone.View.extend({
                             </nav>',
 
   initialize: function(){
-    this.formView = new FormView({collection: this.collection});
-    this.dashboardView = new DashboardView({collection: this.collection})
+    // this.loginView = new LoginView();
+    // this.formView = new FormView({collection: this.collection});
+    // this.dashboardView = new DashboardView({collection: this.collection})
     this.render();
   },
 
   render: function(){
+    if(window.location.path )
     return this.$el.html([
-      $(this.navDiv),
-      this.formView.$el,
-      this.dashboardView.$el
+      $(this.navDiv)
+      // this.loginView.$el
+      // this.formView.$el,
+      // this.dashboardView.$el
     ]);
   }
 
