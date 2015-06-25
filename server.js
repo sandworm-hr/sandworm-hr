@@ -9,6 +9,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/client'));
 // var stockRouter = express.Router();
+app.get('/', handler.signupLogin);
+app.get('/login', handler.login)
 app.use('/api/stocks', handler.getStocks);
 
 // require('./request-handler')(stockRouter);
