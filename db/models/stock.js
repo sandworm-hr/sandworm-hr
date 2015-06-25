@@ -8,4 +8,4 @@ var Stock = db.Model.extend({
   },
 });
 
-module.exports = Score;
+module.exports = Stock;
