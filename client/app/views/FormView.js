@@ -104,16 +104,19 @@ var FormView = Backbone.View.extend({
   handleSubmit: function(e) {
     e.preventDefault();
     //start spinner upon stock creation
-    this.startSpinner(); 
-    var d = new Date();
-    var requestStock = {
-      symbol: this.$('#symbol').val().toUpperCase(),
-      from: this.$('#date').val(),
-      amount: this.$('#amount').val(),
-      to: d.toISOString().slice(0,10) //Just the YYYY-MM-DD portion
-    };
-
-    this.handleDuplicates(requestStock);
+    if (this.$('form')[0].checkValidity()) {
+      this.startSpinner(); 
+      var d = new Date();
+      var requestStock = {
+        symbol: this.$('#symbol').val().toUpperCase(),
+        from: this.$('#date').val(),
+        amount: this.$('#amount').val(),
+        to: d.toISOString().slice(0,10) //Just the YYYY-MM-DD portion
+      };
+      this.handleDuplicates(requestStock);
+    } else {
+      this.$('form')[0].reset();
+    }
     this.$('#symbol').val('');
     this.$('#amount').val('');
   },
