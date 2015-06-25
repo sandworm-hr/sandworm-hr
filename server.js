@@ -53,8 +53,11 @@ passport.use(new LocalStrategy( function(username, password, done) {
 }));
 
 var ensureAuthenticated = function (req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/#signin');
+  if (req.isAuthenticated()) { 
+    console.log('is authenticated');
+    return next(); }
+  console.log('not signed in');
+  res.status(400).send('please sign in');
 };
 app.use(passport.initialize());
 app.use(passport.session());
@@ -65,18 +68,17 @@ app.get('/signout', function(req, res){
 });
 
 app.post('/signin',
-  passport.authenticate('local', { successRedirect: '/#front',
-                                   failureRedirect: '/#signin',
-                                   failureFlash: true})
+  passport.authenticate('local'), function(req, res) {
+    res.send('success!');
+  }
 );
 
 app.post('/signup', function(req, res){
+  console.log(req.session);
   var username = req.body.username;
   var password = req.body.password;
-
   new User({username: username}).fetch().then(function(found){
     if(found){
-      console.log('found');
       res.status(400).send('username exists');
     } else {
       var user = new User({

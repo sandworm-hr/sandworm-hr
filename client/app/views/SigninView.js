@@ -40,6 +40,7 @@ var SigninView = Backbone.View.extend({
 
   handleSubmit: function(e) {
     e.preventDefault();
+    var context = this;
     //start spinner upon stock creation
     this.startSpinner(); 
     var userSignin = {
@@ -51,9 +52,15 @@ var SigninView = Backbone.View.extend({
       url: "/signin",
       type: "POST",
       data: userSignin,
-      success: function () {
-        //window.location.hash = 'front';
+      success: function (result) {
+        console.log(result);
+        window.location.hash = 'front';
+        context.stopSpinner();
       },
+      error: function(error) {
+        console.log(error.responseText);
+        context.stopSpinner();
+      }
     });
 
     //Sign in new user

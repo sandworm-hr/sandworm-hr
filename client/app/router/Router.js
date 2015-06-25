@@ -3,7 +3,9 @@ var AppRouter = Backbone.Router.extend({
   routes: {
     'signup': 'signup',
     'signin': 'signin',
-    'front' : 'front'
+    'front' : 'front',
+    'portfolios' : 'portfolios',
+    'about' : 'about'
   }
 
 });

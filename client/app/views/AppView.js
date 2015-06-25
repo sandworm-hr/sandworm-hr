@@ -9,9 +9,9 @@ var AppView = Backbone.View.extend({
                                <ul class="nav nav-pills navbar-nav navbar-right"> \
                                  <li><a href="#signup">Sign up</a></li> \
                                  <li><a href="#signin">Sign in</a></li> \
-                                 <li><a href="#front">My Portfolios</a></li> \
+                                 <li><a href="#portfolios">My Portfolios</a></li> \
                                  <li><a href="#front">New Portfolio</a></li> \
-                                 <li><a href="#front">About Us</a></li> \
+                                 <li><a href="#about">About Us</a></li> \
                                </ul> \
                              </div> \
                             </nav>',
