@@ -30,6 +30,7 @@ var AppView = Backbone.View.extend({
     this.$el.empty();
     this.formView.delegateEvents();
     this.dashboardView.delegateEvents();
+    this.dashboardView.infoView.delegateEvents();
     this.$el.append([
       $(this.navDiv),
       this.formView.$el,
@@ -41,6 +42,7 @@ var AppView = Backbone.View.extend({
     this.$el.empty();
     this.signupView.delegateEvents();
     this.dashboardView.delegateEvents();
+    this.dashboardView.infoView.delegateEvents();
     this.$el.append([
       $(this.navDiv),
       this.signupView.$el,
@@ -52,6 +54,7 @@ var AppView = Backbone.View.extend({
     this.$el.empty();
     this.signinView.delegateEvents();
     this.dashboardView.delegateEvents();
+    this.dashboardView.infoView.delegateEvents();
     this.$el.append([
       $(this.navDiv),
       this.signinView.$el,
