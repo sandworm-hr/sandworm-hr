@@ -24,7 +24,8 @@ var SignupView = Backbone.View.extend({
             </form>\
           </div> \
         </div> \
-      </div>',
+      </div>\
+      <div class="text-center error-message container"></div>',
 
   initialize: function(){
     this.render();
@@ -38,11 +39,23 @@ var SignupView = Backbone.View.extend({
     'submit': 'handleSubmit'
   },
 
+  clearError: function() {
+    this.$('.error-message').html('');
+  },
+
+  handleSignupError: function() {
+    var errorText = 'That user already exists. Please choose another username.';
+    this.$('form')[0].reset();
+    this.$('.error-message').html(errorText);
+  },
+
   handleSubmit: function(e) {
     var context = this;
     e.preventDefault();
-    //start spinner upon stock creation
-    context.startSpinner(); 
+
+    //start spinner while credentials are created
+    this.startSpinner();
+    this.clearError();
     var userSignup = {
       username: this.$('#username').val(),
       password: this.$('#password').val(),
@@ -59,6 +72,7 @@ var SignupView = Backbone.View.extend({
       },
       error: function(error) {
         console.log(error.responseText);
+        context.handleSignupError();
         context.stopSpinner();
       }
     });
