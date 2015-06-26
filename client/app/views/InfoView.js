@@ -19,7 +19,6 @@ var InfoView = Backbone.View.extend({
 
 
   initialize: function() {
-    this.portfolioName = '';
     this.collection.on('sync edited remove reset', this.render, this);
   },
 
