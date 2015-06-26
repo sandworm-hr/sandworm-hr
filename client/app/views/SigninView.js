@@ -24,7 +24,8 @@ var SigninView = Backbone.View.extend({
             </form>\
           </div> \
         </div> \
-      </div>',
+      </div>\
+      <div class="text-center error-message container"></div>',
 
   initialize: function(){
     this.render();
@@ -38,11 +39,23 @@ var SigninView = Backbone.View.extend({
     'submit': 'handleSubmit'
   },
 
+  handleSigninError: function() {
+    var errorText = 'Your username or password is incorrect. Please try again.';
+    this.$('form')[0].reset();
+    this.$('.error-message').text(errorText);
+  },
+
+  clearError: function() {
+    this.$('.error-message').text('');
+  },
+
   handleSubmit: function(e) {
     e.preventDefault();
     var context = this;
-    //start spinner upon stock creation
+
+    //start spinner while credentials are checked
     this.startSpinner(); 
+    this.clearError();
     var userSignin = {
       username: this.$('#username').val(),
       password: this.$('#password').val(),
@@ -59,11 +72,10 @@ var SigninView = Backbone.View.extend({
       },
       error: function(error) {
         console.log(error.responseText);
+        context.handleSigninError();
         context.stopSpinner();
       }
     });
-
-    //Sign in new user
   },
   
   startSpinner: function(){
