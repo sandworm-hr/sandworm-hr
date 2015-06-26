@@ -5,8 +5,9 @@ var PortfolioView = Backbone.View.extend({
   template: _.template('<div class="info-item row" id="<%=id%>"><%= name %></div>'),
 
 
-  initialize: function(data) {
-    this.data = data.data;
+
+  initialize: function(options, data) {
+    this.data = data;
     this.render(this.data);
   },
 
@@ -15,14 +16,13 @@ var PortfolioView = Backbone.View.extend({
   },
 
   openPortfolio: function() {
-    var id = this.data.id;
     var stocks = this.collection;
     stocks.reset(null);
-
+    var id = this.data.id;
     $.ajax({
       url: '/stocks',
       type: 'POST',
-      data: { 'id': id},
+      data: {'id': id},
       success: function(data) {
         data.forEach(function (stock) {
           stocks.create(stock);
