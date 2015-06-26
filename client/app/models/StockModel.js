@@ -42,17 +42,22 @@ var StockModel = Backbone.Model.extend({
     });
     var firstExisting = history[existingIndex];
     var earlyHistory = history.slice(0, existingIndex);
+    _.each(this.get('history'), function(snapshot) {
+      snapshot.nShares += nShares;
+    });
 
     var updatedHistory = earlyHistory.concat(this.get('history'));
     this.set('history', updatedHistory);
-    this.addTo(firstExisting.date, amount);
+    var oldAmount = this.get('amount');
+    this.set('amount', this.get('amount') + amount);
+    this.trigger('edited', this);
   },
 
   // adds shares to existing stock with a complete history
   addTo: function(startDate, amount) {
-    var context = this;
+    this.set('amount', this.get('amount') + amount);
     var firstExisting = _.find(this.get('history'), function(snapshot) {
-      return (new Date(startDate) >= new Date(snapshot.date));
+      return (new Date(startDate) <= new Date(snapshot.date));
     });
     var nShares = amount / firstExisting.adjClose;
     _.each(this.get('history'), function(snapshot) {
