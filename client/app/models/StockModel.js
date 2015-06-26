@@ -51,8 +51,9 @@ var StockModel = Backbone.Model.extend({
   // adds shares to existing stock with a complete history
   addTo: function(startDate, amount) {
     var context = this;
+    startDate = new Date(startDate);
     var firstExisting = _.find(this.get('history'), function(snapshot) {
-      return (new Date(startDate) >= new Date(snapshot.date));
+      return (startDate >= new Date(snapshot.date));
     });
     var nShares = amount / firstExisting.adjClose;
     _.each(this.get('history'), function(snapshot) {

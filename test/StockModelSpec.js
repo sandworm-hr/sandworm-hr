@@ -63,13 +63,27 @@
     it('should update an existing stock with an earlier history', function() {
       var tslaModel = new StockModel({amount: 100});
       stubParse(tslaModel, tsla1);
-      var tslaHist = tslaModel.get('history');
+
+      var tslaHist1 = tslaModel.get('history');
       var trajectory = tslaModel.getTrajectory();
       var firstLength = trajectory.length;
       var firstAmount = tslaModel.get('amount');
-      var nShares = tslaHist[0].nShares;
+      var lastVal1 = tslaModel.getEndVal();
+      var nShares1 = tslaHist1[0].nShares;
 
       expect(trajectory[0].value).to.equal(firstAmount);
+      var nShares2 = 100 / tsla2[0].adjClose;
+      tslaModel.update(tsla2, 100);
+
+      var newTrajectory = tslaModel.getTrajectory();
+      var tslaHist2 = tslaModel.get('history');
+      var lastVal2 = tslaModel.getEndVal();
+      // expect(tslaModel.get('amount')).to.equal(200); // should this be right?
+      expect(newTrajectory).to.have.length.above(trajectory.length);
+      expect(newTrajectory[0].value).to.equal(100);
+      expect(tslaHist2[0].nShares).to.equal(nShares2);
+      expect(tslaHist2[tslaHist2.length - 1].nShares).to.equal(nShares1 + nShares2);
+      expect(lastVal2).to.be.above(lastVal1);
     });
 
   });
