@@ -19,6 +19,7 @@ var InfoView = Backbone.View.extend({
 
 
   initialize: function() {
+    this.portfolioName = '';
     this.collection.on('sync edited remove reset', this.render, this);
   },
 
@@ -33,6 +34,7 @@ var InfoView = Backbone.View.extend({
       url:'/auth',
       success: function () {
         new PortfolioModel({collection: context.collection, name: portfolioName});
+        context.$('.info-view-title').text('Summary: portfolioName');
         context.$('#pname').val('');
         context.renderSuccess(portfolioName);
       },
