@@ -8,10 +8,10 @@ var GraphView = Backbone.View.extend({
   },
 
   plotLine: function(stocks) {
-    var margin = {top: 20, right: 10, bottom: 20, left: 10},
+    var margin = {top: 60, right: 10, bottom: 20, left: 10},
         padding = {top: 10, right: 10, bottom: 10, left: 10},
         outerWidth = 700,
-        outerHeight = 250,
+        outerHeight = 300,
         innerWidth = outerWidth - margin.left - margin.right,
         innerHeight = outerHeight - margin.top - margin.bottom,
         width = innerWidth - padding.left - padding.right,
@@ -72,7 +72,7 @@ var GraphView = Backbone.View.extend({
             .attr("dx", "-.8em")
             .attr("dy", ".15em")
             .attr("transform", function(d) {
-                return "rotate(-65)" 
+                return "rotate(-45)" 
                 });
 
     svg.append("g")
