@@ -42,10 +42,12 @@ var InfoView = Backbone.View.extend({
   },
 
   render: function() {
+    this.$el.hide();
     this.$el.empty();
     this.delegateEvents();
     if (this.collection.length > 0) {
-      var headerText = '<input type="text" id="pname" placeholder="Portfolio name"><button>Save</button><div class="text-center error-message container"></div><h1 class="info-view-title">Summary</h1><div class="stock-views-container text-left"></div>';
+      this.$el.show();
+      var headerText = '<input type="text" id="pname" placeholder="Portfolio name" required><button>Save</button><div class="text-center error-message container"></div><h1 class="info-view-title">Summary</h1><div class="stock-views-container text-left"></div>';
 
       this.$el.append(headerText);
       var port = {};
