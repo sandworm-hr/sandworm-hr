@@ -28,17 +28,26 @@ var InfoView = Backbone.View.extend({
 
   savePortfolio: function() {
     var context = this;
+    var portfolioName = this.$('#pname').val();
     $.ajax({
       url:'/auth',
       success: function () {
-        new PortfolioModel({collection: context.collection, name: context.$('#pname').val()});
+        new PortfolioModel({collection: context.collection, name: portfolioName});
+        context.$('.info-view-title').text('Summary: ' + portfolioName);
         context.$('#pname').val('');
+        context.renderSuccess(portfolioName);
       },
       error: function() {
-        context.$('.error-message').text('You must sign in to add portfolios');
+        context.$('.error-message').text('Sign in above to save this portfolio.');
         window.location.hash = 'signin';
       }
     });
+  },
+
+  renderSuccess: function(name) {
+    this.$('.error-message').text('');
+    this.$('.save-button-wrapper').addClass('success-message');
+    this.$('.success-message').html('Success! Portfolio <strong>' + name + '</strong> has been saved.');
   },
 
   render: function() {
@@ -47,7 +56,7 @@ var InfoView = Backbone.View.extend({
     this.delegateEvents();
     if (this.collection.length > 0) {
       this.$el.show();
-      var headerText = '<input type="text" id="pname" placeholder="Portfolio name" required><button>Save</button><div class="text-center error-message container"></div><h1 class="info-view-title">Summary</h1><div class="stock-views-container text-left"></div>';
+      var headerText = '<div class="save-button-wrapper"><input type="text" id="pname" placeholder="Portfolio name" required><button>Save</button></div><div class="text-center error-message row"></div><h1 class="info-view-title">Summary</h1><div class="stock-views-container text-left"></div>';
 
       this.$el.append(headerText);
       var port = {};
