@@ -23,6 +23,7 @@
     "bootstrap": "~3.3.5",
     "mocha": "~2.2.5",
     "chai": "~3.0.0",
-    "backbone-validation": "~0.11.5"
+    "backbone-validation": "~0.11.5",
+    "chai-datetime": "~1.4.0"
   }
 }
