@@ -46,7 +46,7 @@ var SigninView = Backbone.View.extend({
   },
 
   clearError: function() {
-    this.$('.error-message').text('');
+    $('.error-message').text('');
   },
 
   handleSubmit: function(e) {
@@ -66,16 +66,17 @@ var SigninView = Backbone.View.extend({
       type: "POST",
       data: userSignin,
       success: function (result) {
-        console.log(result);
         window.location.hash = 'front';
         context.stopSpinner();
       },
       error: function(error) {
-        console.log(error.responseText);
         context.handleSigninError();
         context.stopSpinner();
       }
     });
+
+    this.$('#username').val('');
+    this.$('#password').val('');
   },
   
   startSpinner: function(){
