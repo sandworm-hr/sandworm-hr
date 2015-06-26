@@ -24,6 +24,7 @@ var PortfolioView = Backbone.View.extend({
       type: 'POST',
       data: {'id': id},
       success: function(data) {
+        console.log(data);
         data.forEach(function (stock) {
           stocks.create(stock);
         });
