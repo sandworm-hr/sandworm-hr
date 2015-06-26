@@ -20,6 +20,8 @@ var AppView = Backbone.View.extend({
   initialize: function(){
     this.formView = new FormView({collection: this.collection});
     this.dashboardView = new DashboardView({collection: this.collection});
+    this.portfoliosView = new PortfoliosView({collection: this.collection});
+
     this.signupView = new SignupView();
     this.signinView = new SigninView();
     this.render();
@@ -60,7 +62,7 @@ var AppView = Backbone.View.extend({
 
   portfolios: function () {
     this.$el.empty();
-    this.portfoliosView = new PortfoliosView();
+    this.portfoliosView = new PortfoliosView({collection: this.collection});
     this.$el.append([
       $(this.navDiv),
       this.portfoliosView.$el

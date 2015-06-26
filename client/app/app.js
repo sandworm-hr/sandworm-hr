@@ -16,8 +16,8 @@
     appView.signin();
   });
 
-  router.on('route:portfolios',function(test){
-    appView.render();
+  router.on('route:portfolios',function(){
+    appView.portfolios();
   });
 
   router.on('route:about',function(){

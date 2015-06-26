@@ -63,7 +63,7 @@ app.use(passport.session());
 
 app.get('/signout', function(req, res){
   req.session.destroy();
-  res.redirect('/#signin');
+  res.redirect('/');
 });
 
 app.post('/signin',
@@ -93,6 +93,13 @@ app.post('/signup', function(req, res){
 
 });
 
+app.get('/portfolios', function(req, res) {
+  var id = req.user.id;
+  new Portfolio().query('where', 'users_id', '=', id).fetchAll().then(function(portfolios) {
+    res.send(portfolios);
+  });
+});
+
 app.post('/portfolios', function(req, res) {
   var name = req.body.name;
   var id = req.user.id;
@@ -104,6 +111,14 @@ app.post('/portfolios', function(req, res) {
 app.post('/stock', function(req, res) {
   new Stock(req.body).save().then(function(newStock) {
     res.send(newStock);
+  });
+});
+
+app.post('/stocks', function(req, res) {
+  var id = req.body.id;
+  console.log(id);
+  new Stock().query('where','portfolios_id', '=', id).fetchAll().then(function(stocks) {
+    res.send(stocks);
   });
 });
 
