@@ -32,13 +32,13 @@ var InfoView = Backbone.View.extend({
       url:'/auth',
       success: function () {
         new PortfolioModel({collection: context.collection, name: context.$('#pname').val()});
+        context.$('#pname').val('');
       },
       error: function() {
         context.$('.error-message').text('You must sign in to add portfolios');
         window.location.hash = 'signin';
       }
     });
-    context.$('#pname').val('');
   },
 
   render: function() {
