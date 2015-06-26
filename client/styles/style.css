@@ -74,6 +74,7 @@ label {
 
 .portfolio {
   cursor: pointer;
+  white-space: pre;
 }
 
 

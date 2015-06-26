@@ -2,7 +2,7 @@
 var PortfolioView = Backbone.View.extend({
 
 
-  template: _.template('<div class="info-item row portfolio" id="<%=id%>"><i class="glyphicon glyphicon-folder-open"></i><%= name %></div>'),
+  template: _.template('<div class="info-item row portfolio" id="<%=id%>"><i class="glyphicon glyphicon-folder-open"></i>    <%= name %></div>'),
 
 
 
