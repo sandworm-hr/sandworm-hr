@@ -7,6 +7,11 @@
   router.on('route:front',function(){
     appView.render();
   });
+
+  router.on('route:new',function(){
+    appView.collection.reset(null);
+    appView.render();
+  });
   
   router.on('route:signup',function(){
     appView.signup();
@@ -17,11 +22,29 @@
   });
 
   router.on('route:portfolios',function(){
-    appView.portfolios();
+    $.ajax({
+      url: '/auth',
+      success: function() {
+        appView.portfolios();
+      },
+      error: function() {
+        router.navigate('signin', true);
+      }
+    });
   });
 
   router.on('route:about',function(){
     appView.render();
+  });
+
+  router.on('route:signout',function(){
+    $.ajax({
+      url: '/signout',
+      success: function() {
+        appView.collection.reset();
+        appView.render();
+      }
+    });
   });
 
   Backbone.history.start();

@@ -19,7 +19,7 @@ var InfoView = Backbone.View.extend({
 
 
   initialize: function() {
-    this.collection.on('sync edited remove', this.render, this);
+    this.collection.on('sync edited remove reset', this.render, this);
   },
 
   events: {
@@ -31,11 +31,12 @@ var InfoView = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.children().empty();
+    this.$el.empty();
     this.delegateEvents();
-    var headerText = '<input type="text" id="pname" placeholder="Portfolio name"><button>Save</button><h1 class="info-view-title">Summary</h1><div class="stock-views-container text-left"></div>';
-
     if (this.collection.length > 0) {
+      var headerText = '<input type="text" id="pname" placeholder="Portfolio name"><button>Save</button><h1 class="info-view-title">Summary</h1><div class="stock-views-container text-left"></div>';
+
+      this.$el.html(headerText);
       var port = {};
       port.start = 0;
       port.end = 0;
@@ -45,10 +46,9 @@ var InfoView = Backbone.View.extend({
         return new StockView({model: item}).render();
       });
       port.percentage = Math.round((port.end/port.start - 1) * 100);
+      this.$el.find('.stock-views-container').html(this.template(port));
+      this.$el.find('.stock-views-container').append(stocks);
     }
-    this.$el.html(headerText);
-    this.$el.find('.stock-views-container').html(this.template(port));
-    this.$el.find('.stock-views-container').append(stocks);
   }
 
 });

@@ -11,7 +11,7 @@ var PortfoliosView = Backbone.View.extend({
       success: function(data) {
         context.render(data);    
       }
-    })
+    });
   },
 
   render: function(list) {
@@ -20,7 +20,7 @@ var PortfoliosView = Backbone.View.extend({
     var headerText = '<h1 class="info-view-title">Summary</h1><div class="stock-views-container text-left"></div>';
     this.$el.html(headerText);
     for (var i = 0; i < list.length; i++) {
-      this.$el.append(new PortfolioView(list[i]).$el);
+      this.$el.append(new PortfolioView({collection: this.collection, data: list[i]}).$el);
     }
   }
 

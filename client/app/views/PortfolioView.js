@@ -6,7 +6,8 @@ var PortfolioView = Backbone.View.extend({
 
 
   initialize: function(data) {
-    this.render(data);
+    this.data = data.data;
+    this.render(this.data);
   },
 
   events: {
@@ -14,14 +15,19 @@ var PortfolioView = Backbone.View.extend({
   },
 
   openPortfolio: function() {
-    var id = this.id;
+    var id = this.data.id;
+    var stocks = this.collection;
+    stocks.reset(null);
 
     $.ajax({
       url: '/stocks',
       type: 'POST',
       data: { 'id': id},
       success: function(data) {
-        console.log(data);
+        data.forEach(function (stock) {
+          stocks.create(stock);
+        });
+        window.location.hash = 'front';
       }
     });
 

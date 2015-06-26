@@ -4,7 +4,7 @@ var GraphView = Backbone.View.extend({
   className: 'graph',
 
   initialize: function() {
-    this.collection.on('sync edited remove', this.render, this);
+    this.collection.on('sync edited remove reset', this.render, this);
   },
 
   plotLine: function(stocks) {
