@@ -40,7 +40,7 @@ var SignupView = Backbone.View.extend({
   },
 
   clearError: function() {
-    this.$('.error-message').html('');
+    $('.error-message').html('');
   },
 
   handleSignupError: function() {
@@ -66,16 +66,17 @@ var SignupView = Backbone.View.extend({
       type: "POST",
       data: userSignup,
       success: function (result) {
-        console.log(result);
         window.location.hash = 'front';
         context.stopSpinner();
       },
       error: function(error) {
-        console.log(error.responseText);
         context.handleSignupError();
         context.stopSpinner();
       }
     });
+
+    this.$('#username').val('');
+    this.$('#password').val('');
 
     //Sign up new user
   },

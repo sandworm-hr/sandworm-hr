@@ -14,10 +14,12 @@
   });
   
   router.on('route:signup',function(){
+    appView.signupView.$('.error-message').text('');
     appView.signup();
   });
 
   router.on('route:signin',function(){
+    appView.signinView.$('.error-message').text('');
     appView.signin();
   });
 
@@ -29,6 +31,7 @@
       },
       error: function() {
         router.navigate('signin', true);
+        appView.signinView.$('.error-message').text('Please sign in first!');
       }
     });
   });

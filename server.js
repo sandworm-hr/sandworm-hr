@@ -123,8 +123,6 @@ app.post('/stocks', function(req, res) {
 
 app.use('/api/stocks', handler.getStocks);
 
-// require('./request-handler')(stockRouter);
-
 var port = process.env.PORT || 8080;
 
 app.listen(port);
