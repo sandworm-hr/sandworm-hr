@@ -51,19 +51,17 @@ passport.use(new LocalStrategy( function(username, password, done) {
     });
 }));
 
-var ensureAuthenticated = function (req, res, next) {
-  if (req.isAuthenticated()) { 
-    console.log('is authenticated');
-    return next(); }
-  console.log('not signed in');
-  res.status(400).send('please sign in');
+var ensureAuthenticated = function (req, res) {
+  if (req.isAuthenticated()) { res.status(202).send('is authenticated'); }
+  else { res.status(400).send('please sign in'); }
 };
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/signout', function(req, res){
   req.session.destroy();
-  res.redirect('/#signin');
+  res.send(202);
 });
 
 app.post('/signin',
@@ -93,6 +91,15 @@ app.post('/signup', function(req, res){
 
 });
 
+app.get('/auth', ensureAuthenticated);
+
+app.get('/portfolios', function(req, res) {
+  var id = req.user.id;
+  new Portfolio().query('where', 'users_id', '=', id).fetchAll().then(function(portfolios) {
+    res.send(portfolios);
+  });
+});
+
 app.post('/portfolios', function(req, res) {
   var name = req.body.name;
   var id = req.user.id;
@@ -104,6 +111,13 @@ app.post('/portfolios', function(req, res) {
 app.post('/stock', function(req, res) {
   new Stock(req.body).save().then(function(newStock) {
     res.send(newStock);
+  });
+});
+
+app.post('/stocks', function(req, res) {
+  var id = req.body.id;
+  new Stock().query('where','portfolios_id', '=', id).fetchAll().then(function(stocks) {
+    res.send(stocks);
   });
 });
 

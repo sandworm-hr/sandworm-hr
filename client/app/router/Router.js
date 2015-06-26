@@ -5,7 +5,9 @@ var AppRouter = Backbone.Router.extend({
     'signin': 'signin',
     'front' : 'front',
     'portfolios' : 'portfolios',
-    'about' : 'about'
+    'about' : 'about',
+    'new' : 'new',
+    'signout' : 'signout'
   }
 
 });

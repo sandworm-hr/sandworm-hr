@@ -7,7 +7,7 @@ var DashboardView = Backbone.View.extend({
     this.graphView = new GraphView({collection: this.collection});
     this.infoView = new InfoView({collection: this.collection});
     // this.render();
-    this.collection.on('add', function() {
+    this.collection.on('add reset', function() {
       this.render();
     }, this);
   },
