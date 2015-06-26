@@ -35,7 +35,7 @@ var InfoView = Backbone.View.extend({
         context.$('#pname').val('');
       },
       error: function() {
-        context.$('.error-message').text('You must sign in to add portfolios');
+        context.$('.error-message').text('Sign in above to save this portfolio.');
         window.location.hash = 'signin';
       }
     });
@@ -47,7 +47,7 @@ var InfoView = Backbone.View.extend({
     this.delegateEvents();
     if (this.collection.length > 0) {
       this.$el.show();
-      var headerText = '<input type="text" id="pname" placeholder="Portfolio name" required><button>Save</button><div class="text-center error-message container"></div><h1 class="info-view-title">Summary</h1><div class="stock-views-container text-left"></div>';
+      var headerText = '<input type="text" id="pname" placeholder="Portfolio name" required><button>Save</button><div class="text-center error-message row"></div><h1 class="info-view-title">Summary</h1><div class="stock-views-container text-left"></div>';
 
       this.$el.append(headerText);
       var port = {};
