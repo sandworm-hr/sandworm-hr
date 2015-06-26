@@ -17,7 +17,7 @@ var PortfoliosView = Backbone.View.extend({
   render: function(list) {
     this.$el.children().empty();
     this.delegateEvents();
-    var headerText = '<h1 class="info-view-title">Summary</h1><div class="stock-views-container text-left"></div>';
+    var headerText = '<h1 class="info-view-title">My Portfolios</h1><div class="stock-views-container text-left"></div>';
     this.$el.html(headerText);
     for (var i = 0; i < list.length; i++) {
       this.$el.append(new PortfolioView({collection: this.collection}, list[i]).$el);
