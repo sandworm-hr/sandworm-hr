@@ -47,7 +47,7 @@ var InfoView = Backbone.View.extend({
     if (this.collection.length > 0) {
       var headerText = '<input type="text" id="pname" placeholder="Portfolio name"><button>Save</button><div class="text-center error-message container"></div><h1 class="info-view-title">Summary</h1><div class="stock-views-container text-left"></div>';
 
-      this.$el.html(headerText);
+      this.$el.append(headerText);
       var port = {};
       port.start = 0;
       port.end = 0;
