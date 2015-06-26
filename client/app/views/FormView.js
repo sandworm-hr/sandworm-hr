@@ -90,10 +90,12 @@ var FormView = Backbone.View.extend({
       } else {
         this.startSpinner();
         // makes API call to get earlier stock history, then updates model
-        stocks.getNewStockTrajectory(params).then(function(resp) {
+          stocks.getNewStockTrajectory(params).then(function(resp) {
           existingStock.update(resp, parseFloat(params.amount));
         });
       }
+      //stop spinner if we did not make API request via CREATE
+      this.stopSpinner();
     } else {
       /* Create will create a new stock in the collection
        and send a request for the pertinent information */
