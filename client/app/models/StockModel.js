@@ -4,12 +4,16 @@ var StockModel = Backbone.Model.extend({
   url: '/api/stocks',
 
   parse: function(response) {
-    this.set('history', response);
-    this.set('amount', parseFloat(this.get('amount')));
-    var nShares = this.get('amount') / this.get('history')[0].adjClose;
-    _.each(this.get('history'), function(snapshot) {
-      snapshot.nShares = nShares;
-    });
+    if (response.length !== 0) {
+      this.set('history', response);
+      this.set('amount', parseFloat(this.get('amount')));
+      var nShares = this.get('amount') / this.get('history')[0].adjClose;
+      _.each(this.get('history'), function(snapshot) {
+        snapshot.nShares = nShares;
+      });
+    } else {
+      this.destroy();
+    }
   },
 
   /* given an index or date, returns the value of user's stock at that time

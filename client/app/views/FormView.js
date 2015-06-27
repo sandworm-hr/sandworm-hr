@@ -69,7 +69,7 @@ var FormView = Backbone.View.extend({
     //stop loading spinner on page load
     this.stopSpinner(); 
     //stop spinner upon request completion
-    this.collection.on('sync edited', this.stopSpinner, this); 
+    this.collection.on('sync edited destroy', this.stopSpinner, this); 
   },
 
   events: {
