@@ -1,14 +1,17 @@
 var host = process.env.HOST || '127.0.0.1';
 var port = process.env.DBPORT || 3306;
+var dbname = process.env.DBNAME || 'sandworm';
+var dbuser = process.env.DBUSER || 'root';
+var dbpassword = process.env.DBPASSWORD || '';
 
 
 var knex = require('knex')({
   client: 'mysql',
   connection: {
     host: host,
-    user: 'root', // 'sandworm-hr'
-    password: '', // 'sandworm'
-    database: 'sandworm',
+    user: dbuser, // 'sandworm-hr'
+    password: dbpassword, // 'sandworm'
+    database: dbname,
     charset: 'utf8',
     port: port
   }
