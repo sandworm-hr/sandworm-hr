@@ -6,14 +6,14 @@ var InfoView = Backbone.View.extend({
 
   template: _.template('<div class="info-item row">\
                          <div class="info-subtitle col-md-2 col-md-offset-1">Total</div>\
-                         <div class="col-md-4 col-md-offset-1">\
+                         <div class="col-md-5 col-md-offset-1">\
                            <div class="stock-summary">\
-                             <div class="info-stat"> <strong>Initial Value</strong>: $<%= start.toFixed(0) %></div>\
-                             <div class="info-stat"> <strong>Final Value</strong>: $<%= end.toFixed(2) %></div>\
+                             <div class="info-stat"> <strong>Initial Value</strong>: $<%= this.numberWithCommas(start.toFixed(0)) %></div>\
+                             <div class="info-stat"> <strong>Final Value</strong>: $<%= this.numberWithCommas(end.toFixed(2)) %></div>\
                            </div>\
                          </div>\
                          <div class="trend-stats col-md-2">\
-                           <i class="glyphicon glyphicon-arrow-<% if (percentage >= 0) { %>up up-icon<% } else { %>down down-icon<% } %>"></i><%= Math.abs(percentage) %>%\
+                           <i class="glyphicon glyphicon-arrow-<% if (percentage >= 0) { %>up up-icon<% } else { %>down down-icon<% } %>"></i><%= this.numberWithCommas(Math.abs(percentage)) %>%\
                          </div>\
                       </div>'),
 
@@ -42,6 +42,10 @@ var InfoView = Backbone.View.extend({
         window.location.hash = 'signin';
       }
     });
+  },
+
+  numberWithCommas: function(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   },
 
   renderSuccess: function(name) {
