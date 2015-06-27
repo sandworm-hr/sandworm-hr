@@ -149,6 +149,10 @@ var GraphView = Backbone.View.extend({
 
   },
 
+  numberWithCommas: function(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  },
+
   render: function() {
     this.$el.children().detach();
     if (this.collection.length > 0) {  
