@@ -19,8 +19,8 @@ var SigninView = Backbone.View.extend({
                  <input type="password" id="password" class="form-control" required>\
                  <div class="help-block with-errors"></div>\
               </div> \
-              <button type="submit" class="btn btn-default">Submit</button>\
-              <img src="assets/images/loader.gif">\
+              <button type="submit" class="btn btn-default submit-button">Submit</button>\
+              <img id="spinner" src="assets/images/loader.gif">\
             </form>\
           </div> \
         </div> \
@@ -80,11 +80,13 @@ var SigninView = Backbone.View.extend({
   },
   
   startSpinner: function(){
-    this.$('img').show();
+    this.$('.submit-button').hide();
+    this.$('#spinner').show();
   },
 
   stopSpinner: function(){
-    this.$('img').hide();;
+    this.$('#spinner').hide();
+    this.$('.submit-button').show();
   },
 
 
