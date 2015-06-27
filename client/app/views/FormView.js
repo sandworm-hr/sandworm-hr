@@ -11,7 +11,7 @@ var FormView = Backbone.View.extend({
               <div class="form-group"> \
                 <label for="symbol">Stock Symbol</label>\
                 <input pattern="[a-zA-Z0-9-]{1,6}" maxlength="6" type="text" id="symbol" class="form-control" data-error="Invalid Stock Ticker" required>\
-                <div class="help-block with-errors"></div>\
+                <div class="error-message help-block with-errors"></div>\
               </div> \
               <div class="form-group"> \
                 <label for="date">Date</label>\
@@ -69,12 +69,20 @@ var FormView = Backbone.View.extend({
     //stop loading spinner on page load
     this.stopSpinner(); 
     //stop spinner upon request completion
-    this.collection.on('sync edited destroy', this.stopSpinner, this); 
+    this.collection.on('sync edited destroy', this.stopSpinner, this);
+    this.collection.on('destroy', function() {
+      this.$('.error-message').text('Invalid Stock Ticker');
+    }, this);
   },
 
   events: {
     //Form submission form
-    'submit': 'handleSubmit'
+    'submit': 'handleSubmit',
+    'keypress': 'clearErrors'
+  },
+
+  clearErrors: function(){
+    $('.error-message').text('');
   },
 
   handleDuplicates: function(params) {
