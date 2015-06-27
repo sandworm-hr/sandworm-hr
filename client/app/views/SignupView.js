@@ -66,6 +66,8 @@ var SignupView = Backbone.View.extend({
       type: "POST",
       data: userSignup,
       success: function (result) {
+        context.model.set('username', userSignup.username);
+        context.model.set('signedin', true);
         window.location.hash = 'front';
         context.stopSpinner();
       },
