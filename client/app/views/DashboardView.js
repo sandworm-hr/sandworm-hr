@@ -11,6 +11,10 @@ var DashboardView = Backbone.View.extend({
     }, this);
   },
 
+  setUsername: function(name) {
+    this.infoView.setUsername(name);
+  },
+
   render: function(){
     return this.$el.html([
       this.graphView.$el,

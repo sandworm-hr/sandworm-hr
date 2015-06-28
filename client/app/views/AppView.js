@@ -36,6 +36,11 @@ var AppView = Backbone.View.extend({
     this.render();
   },
 
+  setUsername: function(name) {
+    this.model.set('username', name);
+    this.dashboardView.setUsername(name);
+  },
+
   renderBody: function($el) {
     this.$el.empty();
     this.formView.delegateEvents();
@@ -58,7 +63,9 @@ var AppView = Backbone.View.extend({
       url:'/auth',
       success: function (response) {
         context.model.set('signedin', true);
-        context.model.set('username', response);
+        // context.model.set('username', response);
+        // context.dashboardView.setUsername(response);
+        context.setUsername(response);
         context.renderBody(context.formView.$el);
        },
       error: function() {
@@ -84,7 +91,6 @@ var AppView = Backbone.View.extend({
     }
     this.$el.append([
       navbar,
-      $('<div></div>'),
       this.portfoliosView.$el
     ]);
   }

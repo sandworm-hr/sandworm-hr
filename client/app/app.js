@@ -46,7 +46,8 @@
       success: function() {
         appView.collection.reset();
         app.set('signedin', false);
-        app.set('username', null);
+        // app.set('username', null);
+        appView.setUsername(null);
         appView.render();
       }
     });
