@@ -82,6 +82,14 @@ label {
   color: white;
 }
 
+.username {
+  font-weight: 600;
+  color: rgb(174, 202, 215);
+  font-style: italic;
+  margin-left: 4px;
+  font-size: 16px;
+}
+
 /*Info view */
 .info-view {
   height: 304px;
