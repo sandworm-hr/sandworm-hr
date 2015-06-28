@@ -9,14 +9,23 @@ var AppView = Backbone.View.extend({
                <ul class="nav nav-pills navbar-nav navbar-right"> \
                  <li><a href="#signup">Sign Up</a></li> \
                  <li><a href="#signin">Sign In</a></li> \
-                 <li><a href="#signout">Sign Out</a></li>\
-                 <li><a href="#portfolios">My Portfolios</a></li> \
-                 <li><a href="#new">New Portfolio</a></li> \
-                 <li><a href="#about">About Us</a></li> \
                </ul> \
              </div> \
           </nav> \
           <div class="username-verification text-right"></div>',
+
+  template: _.template('<nav class="navbar navbar-inverse navbar-static-top"> \
+                          <div class="container-fluid"> \
+                            <a href="/" class="navbar-brand">Portfol.io</a> \
+                            <ul class="nav nav-pills navbar-nav navbar-right"> \
+                              <li class="username-container">Signed in as <%= username %></li>\
+                              <li><a href="#signout">Sign Out</a></li>\
+                              <li><a href="#portfolios">My Portfolios</a></li> \
+                              <li><a href="#new">New Portfolio</a></li> \
+                            </ul> \
+                         </div> \
+                       </nav> \
+                      <div class="username-verification text-right"></div>'),
 
   initialize: function(){
     this.formView = new FormView({collection: this.collection});
@@ -27,17 +36,41 @@ var AppView = Backbone.View.extend({
     this.render();
   },
 
-  render: function(){
+  renderBody: function(isSignedin, $el) {
     this.$el.empty();
     this.formView.delegateEvents();
     this.dashboardView.delegateEvents();
     this.dashboardView.infoView.delegateEvents();
-    this.$el.append([
-      $(this.navDiv),
-      this.formView.$el,
-      this.dashboardView.$el
-    ]);
-    this.displaySignin();
+
+  },
+
+  render: function(){
+    var context = this;
+    this.$el.empty();
+    this.formView.delegateEvents();
+    this.dashboardView.delegateEvents();
+    this.dashboardView.infoView.delegateEvents();
+    var navbar = $(this.navDiv);
+    $.ajax({
+      url:'/auth',
+      success: function (response) {
+        context.model.set('signedin', true);
+        context.model.set('username', response);
+        navbar = context.template(context.model.attributes);
+        context.$el.append([
+          navbar,
+          context.formView.$el,
+          context.dashboardView.$el
+        ]);
+       },
+      error: function() {
+        context.$el.append([
+          navbar,
+          context.formView.$el,
+          context.dashboardView.$el
+        ]);
+      }
+    });
   },
 
   signup: function() {
@@ -45,12 +78,16 @@ var AppView = Backbone.View.extend({
     this.signupView.delegateEvents();
     this.dashboardView.delegateEvents();
     this.dashboardView.infoView.delegateEvents();
+    var navbar = $(this.navDiv);
+    if (this.model.get('signedin')) {
+      navbar = this.template(this.model.attributes);
+    }
     this.$el.append([
-      $(this.navDiv),
+      navbar,
       this.signupView.$el,
       this.dashboardView.$el
     ]);
-    this.displaySignin();
+    // this.displaySignin();
   },
 
   signin: function() {
@@ -58,22 +95,31 @@ var AppView = Backbone.View.extend({
     this.signinView.delegateEvents();
     this.dashboardView.delegateEvents();
     this.dashboardView.infoView.delegateEvents();
+    var navbar = $(this.navDiv);
+    if (this.model.get('signedin')) {
+      navbar = this.template(this.model.attributes);
+    }
     this.$el.append([
-      $(this.navDiv),
+      navbar,
       this.signinView.$el,
       this.dashboardView.$el
     ]);
-    this.displaySignin();
+    // this.displaySignin();
   },
 
   portfolios: function () {
     this.$el.empty();
     this.portfoliosView = new PortfoliosView({collection: this.collection});
+    var navbar = $(this.navDiv);
+    if (this.model.get('signedin')) {
+      navbar = this.template(this.model.attributes);
+    }
     this.$el.append([
-      $(this.navDiv),
+      navbar,
+      this.template(this.model.attributes),
       this.portfoliosView.$el
     ]);
-    this.displaySignin();
+    // this.displaySignin();
   },
 
   displaySignin: function() {

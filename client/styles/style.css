@@ -74,6 +74,13 @@ label {
   white-space: pre;
 }
 
+.username-container {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  line-height: 29px;
+  color: white;
+}
 
 /*Info view */
 .info-view {

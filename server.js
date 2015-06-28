@@ -52,7 +52,7 @@ passport.use(new LocalStrategy( function(username, password, done) {
 }));
 
 var ensureAuthenticated = function (req, res) {
-  if (req.isAuthenticated()) { res.status(202).send('is authenticated'); }
+  if (req.isAuthenticated()) { res.status(202).send(req.user.username); }
   else { res.status(400).send('please sign in'); }
 };
 
