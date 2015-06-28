@@ -19,6 +19,7 @@ var InfoView = Backbone.View.extend({
 
 
   initialize: function() {
+    this.username = null;
     this.collection.on('sync edited remove reset', this.render, this);
   },
 
@@ -26,22 +27,21 @@ var InfoView = Backbone.View.extend({
     'click button' : 'savePortfolio'
   },
 
+  setUsername: function(name) {
+    this.username = name;
+  },
+
   savePortfolio: function() {
-    var context = this;
     var portfolioName = this.$('#pname').val();
-    $.ajax({
-      url:'/auth',
-      success: function () {
-        new PortfolioModel({collection: context.collection, name: portfolioName});
-        context.$('.info-view-title').text('Summary: ' + portfolioName);
-        context.$('#pname').val('');
-        context.renderSuccess(portfolioName);
-      },
-      error: function() {
-        context.$('.error-message').text('Sign in above to save this portfolio.');
-        window.location.hash = 'signin';
-      }
-    });
+    if (this.username) {
+      new PortfolioModel({collection: context.collection, name: portfolioName});
+      this.$('.info-view-title').text('Summary: ' + portfolioName);
+      this.$('#pname').val('');
+      this.renderSuccess(portfolioName);
+    } else {
+      this.$('.error-message').text('Sign in above to save this portfolio.');
+      window.location.hash = 'signin';
+    }
   },
 
   numberWithCommas: function(x) {
