@@ -152,6 +152,16 @@ label {
   font-style: italic;
 }
 
+/* About Us */
+
+.about-us-container {
+  font-size: 16px;
+}
+
+.profile-image {
+  width: 100%;
+  height: auto;
+}
 
 /*d3 plot styles*/
 .graph {
