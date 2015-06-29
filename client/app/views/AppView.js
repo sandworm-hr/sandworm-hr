@@ -17,7 +17,7 @@ var AppView = Backbone.View.extend({
 
   template: _.template('<nav class="navbar navbar-inverse navbar-static-top"> \
                           <div class="container-fluid"> \
-                            <a href="/" class="navbar-brand">Portfol.io</a> \
+                            <a href="#front" class="navbar-brand">Portfol.io</a> \
                             <ul class="nav nav-pills navbar-nav navbar-right"> \
                               <li class="username-container">Signed in as <strong class="username"><%= username %></strong></li>\
                               <li><a href="#signout">Sign Out</a></li>\
@@ -37,6 +37,7 @@ var AppView = Backbone.View.extend({
     this.signupView = new SignupView({model: this.model});
     this.signinView = new SigninView({model: this.model});
     this.render();
+    window.location.hash = 'front';
   },
 
   setUsername: function(name) {
