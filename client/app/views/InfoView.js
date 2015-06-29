@@ -34,7 +34,7 @@ var InfoView = Backbone.View.extend({
   savePortfolio: function() {
     var portfolioName = this.$('#pname').val();
     if (this.username) {
-      new PortfolioModel({collection: context.collection, name: portfolioName});
+      new PortfolioModel({collection: this.collection, name: portfolioName});
       this.$('.info-view-title').text('Summary: ' + portfolioName);
       this.$('#pname').val('');
       this.renderSuccess(portfolioName);
