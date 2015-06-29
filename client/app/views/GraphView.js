@@ -1,17 +1,22 @@
 /* Backbone view for the graph view
 find more information on mbostock's page for charting line charts: http://bl.ocks.org/mbostock/3883245 */
+
 var GraphView = Backbone.View.extend({
 
-  className: 'graph',
+  className: 'graph col-xs-12 col-sm-7',
 
   initialize: function() {
     this.collection.on('sync edited remove reset', this.render, this);
+    var context = this;
+    $(window).on("resize", function() {
+      context.render.apply(context);
+    });
   },
 
   plotLine: function(stocks) {
     var margin = {top: 60, right: 10, bottom: 20, left: 10},
         padding = {top: 10, right: 10, bottom: 10, left: 10},
-        outerWidth = 700,
+        outerWidth = parseInt(d3.select(".col-sm-7").style("width")),//700,
         outerHeight = 300,
         innerWidth = outerWidth - margin.left - margin.right,
         innerHeight = outerHeight - margin.top - margin.bottom,
@@ -24,17 +29,17 @@ var GraphView = Backbone.View.extend({
     var formatCurrency = function(d) { return "$" + formatValue(d); };
 
     //set boundaries for chart (pixels) - used to scale chart
-    var Xrange = [0,width];
+    var Xrange = [0,width - 100];
     var Yrange = [height, 0];
 
     //x-axis scaled in date/time format
-    var x = d3.time.scale().range(Xrange);
+    var x = d3.time.scale().range(Xrange).nice(d3.time.year);
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom");
 
     //y-axis scaled in standard linear format ($ values)
-    var y = d3.scale.linear().range(Yrange);
+    var y = d3.scale.linear().range(Yrange).nice();
     var yAxis = d3.svg.axis()
         .scale(y)
         .orient("left");
@@ -168,12 +173,10 @@ var GraphView = Backbone.View.extend({
           .on("mouseover", function() { focus.style("display", null); })
           .on("mouseout", function() { focus.style("display", "none"); })
           .on("mousemove", mousemove);
-
-
   },
 
   render: function() {
-    this.$el.children().detach();
+    this.$el.empty();
     if (this.collection.length > 0) {  
       this.plotLine(this.collection, this);
       return this.$el;
