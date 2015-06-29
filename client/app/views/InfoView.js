@@ -19,9 +19,11 @@ var InfoView = Backbone.View.extend({
 
   showSignin: function() {
     // this.$('.error-message').text('Sign in above to save this portfolio.');
-    $('body').append($('<div class="fade-overlay"></div>'));
+    $('body').append($('<div class="fade-overlay container-fluid"></div>'));
     window.location.hash = 'signin';
-    $('.fade-overlay').append($('<div class="error-message row text-center overlay-message">Please sign in before saving your portfolio.</div>'));
+    $('.fade-overlay').append($('<div class="error-message-container col-md-4 col-md-offset-4 text-center">\
+                                   <div class="overlay-message error-message">Please sign in before saving your portfolio.</div>\
+                                </div>'));
   },
 
   initialize: function() {
