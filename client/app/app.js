@@ -37,7 +37,7 @@
   });
 
   router.on('route:about',function(){
-    appView.render();
+    appView.aboutus();
   });
 
   router.on('route:signout',function(){

@@ -9,6 +9,7 @@ var AppView = Backbone.View.extend({
                <ul class="nav nav-pills navbar-nav navbar-right"> \
                  <li><a href="#signup">Sign Up</a></li> \
                  <li><a href="#signin">Sign In</a></li> \
+                 <li><a href="#about">About Us</a></li> \
                </ul> \
              </div> \
           </nav> \
@@ -22,15 +23,17 @@ var AppView = Backbone.View.extend({
                               <li><a href="#signout">Sign Out</a></li>\
                               <li><a href="#portfolios">My Portfolios</a></li> \
                               <li><a href="#new">New Portfolio</a></li> \
+                              <li><a href="#about">About Us</a></li> \
                             </ul> \
-                         </div> \
-                       </nav> \
-                      <div class="username-verification text-right"></div>'),
+                          </div> \
+                        </nav> \
+                        <div class="username-verification text-right"></div>'),
 
   initialize: function(){
     this.formView = new FormView({collection: this.collection});
     this.dashboardView = new DashboardView({collection: this.collection});
-
+    
+    this.aboutusView = new AboutUsView();
     this.signupView = new SignupView({model: this.model});
     this.signinView = new SigninView({model: this.model});
     this.render();
@@ -41,7 +44,8 @@ var AppView = Backbone.View.extend({
     this.dashboardView.setUsername(name);
   },
 
-  renderBody: function(view) {
+  renderBody: function(view, renderDashboard) {
+    renderDashboard = renderDashboard === undefined ? true : renderDashboard;
     this.$el.empty();
     view.delegateEvents();
     this.formView.delegateEvents();
@@ -51,11 +55,18 @@ var AppView = Backbone.View.extend({
     if (this.model.get('signedin')) {
       navbar = this.template(this.model.attributes);
     }
-    this.$el.append([
-      navbar,
-      view.$el,
-      this.dashboardView.$el
-    ]);
+    if(renderDashboard) {
+      this.$el.append([
+        navbar,
+        view.$el,
+        this.dashboardView.$el
+      ]);
+    } else {
+      this.$el.append([
+        navbar,
+        view.$el,
+      ]);
+    }
   },
 
   render: function(){
@@ -64,8 +75,6 @@ var AppView = Backbone.View.extend({
       url:'/auth',
       success: function (response) {
         context.model.set('signedin', true);
-        // context.model.set('username', response);
-        // context.dashboardView.setUsername(response);
         context.setUsername(response);
         context.renderBody(context.formView);
        },
@@ -76,11 +85,15 @@ var AppView = Backbone.View.extend({
   },
 
   signup: function() {
-    this.renderBody(this.signupView);
+    this.renderBody(this.signupView, false);
   },
 
   signin: function() {
-    this.renderBody(this.signinView);
+    this.renderBody(this.signinView, false);
+  },
+
+  aboutus: function() {
+    this.renderBody(this.aboutusView, false);
   },
 
   portfolios: function () {
