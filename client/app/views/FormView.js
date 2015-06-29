@@ -30,40 +30,6 @@ var FormView = Backbone.View.extend({
         </div> \
       </div>',
 
-  // formEl: '<div class="container">\
-  //            <div class="row">\
-  //            </div>\
-  //          </div>',
-
-  // pickStockEl: '<div class="form-group text-center">\
-  //                 <label for="symbol">Pick a Stock</label>\
-  //                 <input type="text" id="symbol" class="form-control">\
-  //                 <button type="button" class="btn btn-default">Next</button>\
-  //               </div>',
-
-  // pickDateTemplate: _.template('<div class="form-group">\
-  //                                   <label for="date">Pick a Start Date</label>\
-  //                                   <h1><%= symbol %></h1>\
-  //                                   <input type="date" id="date" class="form-control">\
-  //                                   <button type="button" class="btn btn-default">Next</button>\
-  //                                 </div>'),
-
-  // pickAmountTemplate: _.template('<div class="form-group">\
-  //                                   <label for="date">Pick an Amount ($)</label>\
-  //                                   <h1><%= symbol %> <%= date %></h1>\
-  //                                   <input type="text" id="amount" class="form-control">\
-  //                                   <button type="button" class="btn btn-default">Next</button>\
-  //                                 </div>'),
-
-  // addStockTemplate: _.template('<div class="btn-group" role="group">\
-  //                                 <h1><%= symbol %></h1>\
-  //                                 <h1><%= date %></h1>\
-  //                                 <h1><%= amount %><h1>\
-  //                                 <button type="submit" class="btn btn-default">Add Stock</button>\
-  //                                 <button type="button" class="btn btn-warning">Cancel</button>\
-  //                               </div>'),
-
-
   initialize: function(){
     this.render();
     //stop loading spinner on page load

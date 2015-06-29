@@ -11,7 +11,6 @@ var Stocks = Backbone.Collection.extend({
 
   findStock: function(symbol) {
     var found = this.find(function(stock) {
-      // console.log(stock);
       return stock.attributes.symbol === symbol;
     });
     return found;
