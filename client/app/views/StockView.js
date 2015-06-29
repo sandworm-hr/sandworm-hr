@@ -3,17 +3,17 @@ var StockView = Backbone.View.extend({
 
   template: _.template('\
      <div class="info-item row">\
-       <div class="info-subtitle col-md-2 col-md-offset-1"><%= symbol %></div>\
-       <div class="col-md-5 col-md-offset-1">\
+       <div class="info-subtitle col-xs-2 col-xs-offset-1 col-md-2 col-md-offset-1"><%= symbol %></div>\
+       <div class="col-xs-5 col-xs-offset-1 col-md-5 col-md-offset-1">\
          <div class="stock-summary">\
            <div class="info-stat"> <strong>Initial Value</strong>: $<%= this.numberWithCommas(amount.toFixed(0)) %></div>\
            <div class="info-stat"> <strong>Final Value</strong>: $<%= this.numberWithCommas(final.toFixed(2)) %></div>\
          </div>\
        </div>\
-       <div class="trend-stats col-md-2">\
+       <div class="trend-stats col-xs-2">\
          <i class="glyphicon glyphicon-arrow-<% if (percentage >= 0) { %>up up-icon<% } else { %>down down-icon<% } %>"></i><%= this.numberWithCommas(Math.abs(percentage)) %>%\
        </div>\
-      <div class="col-md-1"><i class="glyphicon glyphicon-remove remove-icon"></i></div>\
+      <div class="col-xs-1"><i class="glyphicon glyphicon-remove remove-icon"></i></div>\
     </div>'),
 
 
