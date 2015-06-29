@@ -11,6 +11,7 @@
   router.on('route:new',function(){
     appView.collection.reset(null);
     appView.render();
+    window.location.hash = 'front';
   });
   
   router.on('route:signup',function(){
