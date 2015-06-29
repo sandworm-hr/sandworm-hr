@@ -176,8 +176,10 @@ var GraphView = Backbone.View.extend({
   },
 
   render: function() {
+    this.$el.hide();
     this.$el.empty();
     if (this.collection.length > 0) {  
+      this.$el.show();
       this.plotLine(this.collection, this);
       return this.$el;
     }
