@@ -38,6 +38,10 @@ var AboutUsView = Backbone.View.extend({
             </div> \
           </div>\
         </div> \
+     </div>\
+     <div class="row text-center attribution"><p>Icons from <a href="http://glyphicons.com" target="_blank">Glyphicons Free</a>,\
+                         licensed under <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a>.\
+                      </p>\
      </div>',
 
   initialize: function(){

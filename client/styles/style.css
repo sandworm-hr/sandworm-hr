@@ -176,6 +176,10 @@ label {
   font-size: 22px;
 }
 
+.attribution {
+  margin-top: 40px;
+}
+
 
 /*d3 plot styles*/
 .graph {
