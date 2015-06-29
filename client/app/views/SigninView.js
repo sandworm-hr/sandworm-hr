@@ -34,6 +34,10 @@ var SigninView = Backbone.View.extend({
     //stop spinner upon request completion
   },
 
+  removeOverlay: function() {
+    $('.fade-overlay').remove();
+  },
+
   events: {
     //Form submission form
     'submit': 'handleSubmit'
@@ -70,6 +74,7 @@ var SigninView = Backbone.View.extend({
         context.model.set('signedin', true);
         window.location.hash = 'front';
         context.stopSpinner();
+        context.removeOverlay();
       },
       error: function(error) {
         context.handleSigninError();

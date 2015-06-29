@@ -66,6 +66,7 @@ label {
 #select-form {
   background-color: #222;
   color: white;
+  z-index: 1000;
 }
 
 
@@ -148,9 +149,6 @@ label {
   top: 0;
 }
 
-.modal {
-  z-index: 1000;
-}
 
 /*Error messages*/
 

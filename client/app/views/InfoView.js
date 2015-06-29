@@ -20,7 +20,6 @@ var InfoView = Backbone.View.extend({
   showSignin: function() {
     // this.$('.error-message').text('Sign in above to save this portfolio.');
     $('body').append($('<div class="fade-overlay"></div>'));
-    $('#signin-form').addClass('modal');
     window.location.hash = 'signin';
   },
 
