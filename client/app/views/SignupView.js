@@ -6,7 +6,7 @@ var SignupView = Backbone.View.extend({
   divText: '\
       <div class="container"> \
         <div class="row"> \
-          <div class="col-md-4 col-md-offset-4 well text-center" id="select-form">\
+          <div class="col-md-4 col-md-offset-4 well text-center" id="signup-form">\
             <div>Sign Up</div>\
             <form data-toggle="validator" role="form">\
               <div class="form-group"> \
