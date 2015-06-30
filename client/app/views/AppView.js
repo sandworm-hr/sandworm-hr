@@ -46,7 +46,6 @@ var AppView = Backbone.View.extend({
   },
 
   renderBody: function(view, renderDashboard) {
-    renderDashboard = renderDashboard === undefined ? true : renderDashboard;
     this.$el.empty();
     view.delegateEvents();
     this.formView.delegateEvents();
@@ -56,22 +55,16 @@ var AppView = Backbone.View.extend({
     if (this.model.get('signedin')) {
       navbar = this.template(this.model.attributes);
     }
-    if(renderDashboard) {
-      this.$el.append([
-        navbar,
-        view.$el,
-        this.dashboardView.$el
-      ]);
-    } else {
-      this.$el.append([
-        navbar,
-        view.$el,
-      ]);
-    }
+    this.$el.append([
+      navbar,
+      view.$el,
+      this.dashboardView.$el
+    ]);
   },
 
   render: function(){
     var context = this;
+    // immediately makes a request to see if user is signed in
     $.ajax({
       url:'/auth',
       success: function (response) {

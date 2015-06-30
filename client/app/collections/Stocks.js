@@ -9,6 +9,8 @@ var Stocks = Backbone.Collection.extend({
     this.on('clicked', this.removeStock, this);
   },
 
+  // used for checking whether a stock with the given ticker already exists
+  // in the collection
   findStock: function(symbol) {
     var found = this.find(function(stock) {
       return stock.attributes.symbol === symbol;
@@ -16,6 +18,8 @@ var Stocks = Backbone.Collection.extend({
     return found;
   },
 
+  // used when the user is adding an earlier version of an existing stock.
+  // (not called when user asks for a later version, since we already have all the info.)
   getNewStockTrajectory: function(requestStock) {
     var stockModel = new StockModel(requestStock);
     var stockPromise = stockModel.fetch({data:requestStock, type:'POST'});
@@ -24,16 +28,6 @@ var Stocks = Backbone.Collection.extend({
 
   removeStock: function(stock) {
     this.remove(stock);
-  },
-  // returns the latest date associated with any stock in the collection (shoud be roughly today)
-  // note that "stocks" is a part of the variable name to avoid confusion with model methods
-  getStocksMaxDate: function() {
-    return this._getMaxStockTraj.getEndDate();
-  },
-
-  // returns the earliest date associated with any stock in the collection
-  getStocksMinDate: function() {
-    return this._getMinStockTraj.getStartDate();
   },
 
   // returns trajectory for the stock that was purchased at the earliest date
