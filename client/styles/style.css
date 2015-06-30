@@ -144,7 +144,7 @@ label {
 /* Overlay (for when a user tries to save a
   portfolio before signing in */
 .fade-overlay {
-  background-color: rgba(0, 0, 0, 0.62);
+  background-color: rgba(0, 0, 0, 0.75);
   z-index: 100;
   height: 100%;
   width: 100%;
