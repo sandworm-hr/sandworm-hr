@@ -50,18 +50,8 @@ table {
 /* CSS reset End*/
 
 
-span {
-  height: 30px;
-  margin-top: 15px;
-  width: 100px;
-  float: right;
-}
 
-
-label {
-  font-weight: 200;
-  font-size: 12px;
-}
+/* Form styles */
 
 #select-form {
   background-color: #222;
@@ -69,11 +59,12 @@ label {
   z-index: 1000;
 }
 
-
-.portfolio {
-  cursor: pointer;
-  white-space: pre;
+label {
+  font-weight: 200;
+  font-size: 12px;
 }
+
+/* Personalization in navbar */
 
 .username-container {
   position: relative;
@@ -91,7 +82,9 @@ label {
   font-size: 16px;
 }
 
-/*Info view */
+
+/* Info view */
+
 .info-view {
   height: 304px;
   overflow-y: scroll;
@@ -115,6 +108,8 @@ label {
   font-size: 16px;
 }
 
+/* Glyphicons for info view */
+
 .remove-icon {
   color: rgb(202, 80, 80);
   cursor: pointer;
@@ -130,9 +125,14 @@ label {
   margin-right:5px;
 }
 
+
+/* Portfolios view */
+
 .portfolio {
   font-size: 18px;
   font-weight: bold;
+  cursor: pointer;
+  white-space: pre;
   color: rgb(84, 103, 108);
 }
 
@@ -140,6 +140,9 @@ label {
   color: rgba(84, 103, 108, 0.72)
 }
 
+
+/* Overlay (for when a user tries to save a
+  portfolio before signing in */
 .fade-overlay {
   background-color: rgba(0, 0, 0, 0.62);
   z-index: 100;
@@ -149,7 +152,6 @@ label {
   top: 0;
 }
 
-/* overlay only */
 .error-message-container {
   display: inline-block;
 }
@@ -158,13 +160,11 @@ label {
   margin-top: 350px;
   height: 50px;
   color: rgb(234, 125, 125);
-  margin-left: 25px; /* hack, because it was hard to center */
+  margin-left: 25px; /* centering hack */
 }
 
 
-/*Error messages*/
-
-
+/* User feedback */
 
 .error-message {
   font-size: 16px;
