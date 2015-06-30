@@ -5,14 +5,14 @@ var StockModel = Backbone.Model.extend({
 
   parse: function(response) {
     if (response.length !== 0) {
-      this.set('history', response);
+      this.set('history', response); // "history" is just an array of dates, stock prices, etc
       this.set('amount', parseFloat(this.get('amount')));
       var nShares = this.get('amount') / this.get('history')[0].adjClose;
       _.each(this.get('history'), function(snapshot) {
-        snapshot.nShares = nShares;
+        snapshot.nShares = nShares; // keeps track of number of shares for each data point
       });
     } else {
-      this.destroy();
+      this.destroy(); // if there is no data, does not add to collection.
     }
   },
 
@@ -38,23 +38,26 @@ var StockModel = Backbone.Model.extend({
     var context = this;
     var nShares = amount / history[0].adjClose;
 
+    // updates new and existing history with number of shares
     _.each(history, function(snapshot) {
       snapshot.nShares = nShares;
     });
+    _.each(this.get('history'), function(snapshot) {
+      snapshot.nShares += nShares; // updates old data points with extra shares
+    });
+
+    // first index of the stock history where there's overlap
     var existingIndex = _.findIndex(history, function(snapshot) {
       return (new Date(snapshot.date) >= context.getStartDate());
     });
-    var firstExisting = history[existingIndex];
-    var earlyHistory = history.slice(0, existingIndex);
-    _.each(this.get('history'), function(snapshot) {
-      snapshot.nShares += nShares;
-    });
 
+    // concatenate stock histories
+    var earlyHistory = history.slice(0, existingIndex);
     var updatedHistory = earlyHistory.concat(this.get('history'));
     this.set('history', updatedHistory);
-    var oldAmount = this.get('amount');
-    this.set('amount', this.get('amount') + amount);
-    this.trigger('edited', this);
+
+    this.set('amount', this.get('amount') + amount); // total amount invested in this stock
+    this.trigger('edited', this); // alerts views to rerender
   },
 
   // adds shares to existing stock with a complete history
