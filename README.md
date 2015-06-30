@@ -1,6 +1,6 @@
-# Project Name
+# Portfol.io
 
-> Pithy project description
+> Portfol.io is a hypothetical stock investor that allows you to plug in historical values and get an idea of how much money you would have made or lost through past investments. It allows you to continue tracking these portfolios over time.
 
 ## Team
 
@@ -24,11 +24,8 @@
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Node
+- MySQL
 
 ## Development
 
@@ -44,7 +41,7 @@ bower install
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+View the project roadmap [here](https://github.com/sandworm-hr/sandworm-hr/issues)
 
 
 ## Contributing
